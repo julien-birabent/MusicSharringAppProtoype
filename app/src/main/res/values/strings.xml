@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">MusicSharringAppProtoype</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+    <string name="title_profile">My Profile</string>
+    <string name="title_custom_playlist">My Playlists</string>
+    <string name="title_generated_playlist">Generated Playlist</string>
+</resources>

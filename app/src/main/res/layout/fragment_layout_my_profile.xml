@@ -96,7 +96,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:elevation="4dp"
-                android:text="My Playlists"
+                android:text="My recommanded songs"
                 android:textAlignment="center"
                 android:textColor="@color/_black" />
 

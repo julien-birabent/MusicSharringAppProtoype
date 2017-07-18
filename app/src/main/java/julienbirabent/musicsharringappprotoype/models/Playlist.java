@@ -11,11 +11,15 @@ public class Playlist {
     private ArrayList<Song> songs;
     private String name;
     private int idVignette;
+    private int nbOfSongs;
+    private boolean generated;
 
-    public Playlist(ArrayList<Song> songs, String name, int idVignette) {
+    public Playlist(ArrayList<Song> songs, String name, int idVignette, int nbOfSongs, boolean generated) {
         this.songs = songs;
         this.name = name;
         this.idVignette = idVignette;
+        this.nbOfSongs = nbOfSongs;
+        this.generated = generated;
     }
 
     public ArrayList<Song> getSongs() {
@@ -40,5 +44,21 @@ public class Playlist {
 
     public void setIdVignette(int idVignette) {
         this.idVignette = idVignette;
+    }
+
+    public int getNbOfSongs() {
+        return nbOfSongs;
+    }
+
+    public void setNbOfSongs(int nbOfSongs) {
+        this.nbOfSongs = nbOfSongs;
+    }
+
+    public boolean isGenerated() {
+        return generated;
+    }
+
+    public void setGenerated(boolean generated) {
+        this.generated = generated;
     }
 }

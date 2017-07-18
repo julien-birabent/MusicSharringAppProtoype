@@ -8,14 +8,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import julienbirabent.musicsharringappprotoype.Content;
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 
 /**
  * Created by julbi on 2017-07-18.
  */
 
 public class GeneratedPlaylistsFragment extends Fragment {
+
+    ListView playlists;
 
     public GeneratedPlaylistsFragment() {
     }
@@ -36,5 +41,15 @@ public class GeneratedPlaylistsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.generated_playlists_menu, menu);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+       playlists = (ListView) this.getActivity().findViewById(R.id.listView_generated_playlists);
+        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, Content.getInstance().getGeneratedPlaylistsMockUp());
+        playlists.setAdapter(adapter);
     }
 }

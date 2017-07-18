@@ -5,8 +5,10 @@
     <item
         android:icon="@drawable/ic_share"
         android:title="Share"
+        android:visible="true"
         app:showAsAction="always" />
     <item
+
         android:icon="@drawable/ic_more_vertical_black"
         android:title="More options"
         app:showAsAction="always" />

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import julienbirabent.musicsharringappprotoype.Content;
+import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 
@@ -20,7 +20,7 @@ import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 
 public class GeneratedPlaylistsFragment extends Fragment {
 
-    ListView playlists;
+    private ListView playlists;
 
     public GeneratedPlaylistsFragment() {
     }
@@ -49,7 +49,9 @@ public class GeneratedPlaylistsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
        playlists = (ListView) this.getActivity().findViewById(R.id.listView_generated_playlists);
-        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, Content.getInstance().getGeneratedPlaylistsMockUp());
+        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getGeneratedPlaylistsMockUp());
         playlists.setAdapter(adapter);
     }
+
+
 }

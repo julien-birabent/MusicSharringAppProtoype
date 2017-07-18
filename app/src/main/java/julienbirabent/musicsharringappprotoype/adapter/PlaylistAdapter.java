@@ -62,8 +62,8 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         holder.name.setText(playlist.getName());
         holder.vignette.setImageResource(playlist.getIdVignette());
         if(playlist.isGenerated()){
-            holder.nbSongs.setText(playlist.getNbOfSongs() + " songs you never listened to.");
-        }else holder.nbSongs.setText(playlist.getNbOfSongs() + " songs.");
+            holder.nbSongs.setText(playlist.getSongs().length + " songs you never listened to.");
+        }else holder.nbSongs.setText(playlist.getSongs().length + " songs.");
 
 
         return row;

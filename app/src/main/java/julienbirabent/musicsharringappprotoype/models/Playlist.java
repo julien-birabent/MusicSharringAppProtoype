@@ -8,13 +8,13 @@ import java.util.ArrayList;
 
 public class Playlist {
 
-    private ArrayList<Song> songs;
+    private Song[] songs;
     private String name;
     private int idVignette;
     private int nbOfSongs;
     private boolean generated;
 
-    public Playlist(ArrayList<Song> songs, String name, int idVignette, int nbOfSongs, boolean generated) {
+    public Playlist(Song[]  songs, String name, int idVignette, int nbOfSongs, boolean generated) {
         this.songs = songs;
         this.name = name;
         this.idVignette = idVignette;
@@ -22,11 +22,11 @@ public class Playlist {
         this.generated = generated;
     }
 
-    public ArrayList<Song> getSongs() {
+    public Song[] getSongs() {
         return songs;
     }
 
-    public void setSongs(ArrayList<Song> songs) {
+    public void setSongs(Song[] songs) {
         this.songs = songs;
     }
 

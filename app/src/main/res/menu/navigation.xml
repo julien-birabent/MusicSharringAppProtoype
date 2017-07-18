@@ -5,7 +5,8 @@
     <item
         android:id="@+id/generated_playlist"
         android:icon="@drawable/ic_generated_playlist"
-        android:title="@string/title_generated_playlist" />
+        android:title="@string/title_generated_playlist"
+        />
     <item
         android:id="@+id/custom_playlist"
         android:icon="@drawable/ic_custom_playlist"

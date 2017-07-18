@@ -1,10 +1,12 @@
 package julienbirabent.musicsharringappprotoype.models;
 
+import java.io.Serializable;
+
 /**
  * Created by Julien on 2017-07-18.
  */
 
-public class Song {
+public class Song implements Serializable {
 
     private String artist;
     private String album;

@@ -7,14 +7,22 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Slide;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.fragments.CustomPlaylistsFragment;
+import julienbirabent.musicsharringappprotoype.fragments.DisplayListContentFragment;
 import julienbirabent.musicsharringappprotoype.fragments.GeneratedPlaylistsFragment;
 import julienbirabent.musicsharringappprotoype.fragments.MyProfileFragment;
+import julienbirabent.musicsharringappprotoype.models.Playlist;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+
+
 
     protected Toolbar toolbar;
 
@@ -82,4 +90,28 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+        if(adapterView.getAdapter().getItem(i) instanceof Playlist){
+            Playlist playlistSelected =(Playlist) adapterView.getAdapter().getItem(i);
+
+            Bundle args = new Bundle();
+            args.putSerializable("playlist", playlistSelected);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            DisplayListContentFragment displayListContentFragment =  new DisplayListContentFragment();
+            displayListContentFragment.setArguments(args);
+            displayListContentFragment.setEnterTransition(new Slide(Gravity.LEFT));
+            fragmentTransaction.replace(R.id.content, displayListContentFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+
+
+
+
+    }
 }

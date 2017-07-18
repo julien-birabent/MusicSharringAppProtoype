@@ -3,11 +3,13 @@ package julienbirabent.musicsharringappprotoype.fragments;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import julienbirabent.musicsharringappprotoype.MockUpContent;
@@ -40,6 +42,9 @@ public class GeneratedPlaylistsFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
         inflater.inflate(R.menu.generated_playlists_menu, menu);
 
     }
@@ -48,10 +53,17 @@ public class GeneratedPlaylistsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       playlists = (ListView) this.getActivity().findViewById(R.id.listView_generated_playlists);
-        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getGeneratedPlaylistsMockUp());
-        playlists.setAdapter(adapter);
+
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+        playlists = (ListView) this.getActivity().findViewById(R.id.listView_generated_playlists);
+        playlists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getGeneratedPlaylistsMockUp());
+        playlists.setAdapter(adapter);
+
+    }
 }

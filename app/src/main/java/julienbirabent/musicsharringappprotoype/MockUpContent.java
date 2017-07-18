@@ -65,10 +65,10 @@ public class MockUpContent {
         songs = new Song[]{
 
                 new Song("Gorrilaz", "Plastic Beach", "Broken"),
-                new Song("Gorrilaz", "Plastic Beach", "Broken"),
-                new Song("Gorrilaz", "Plastic Beach", "Broken"),
-                new Song("Gorrilaz", "Plastic Beach", "Broken"),
-                new Song("Gorrilaz", "Plastic Beach", "Broken"),
+                new Song("Gorrilaz", "Plastic Beach", "Cloud of unknowing"),
+                new Song("Gorrilaz", "Plastic Beach", "White flag"),
+                new Song("Gorrilaz", "Plastic Beach", "Empire Ants"),
+                new Song("Gorrilaz", "Plastic Beach", "Stylo"),
         };
     }
 

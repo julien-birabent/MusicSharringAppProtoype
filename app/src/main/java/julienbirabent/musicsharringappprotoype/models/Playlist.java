@@ -1,12 +1,13 @@
 package julienbirabent.musicsharringappprotoype.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Julien on 2017-07-18.
  */
 
-public class Playlist {
+public class Playlist implements Serializable {
 
     private Song[] songs;
     private String name;
@@ -61,4 +62,6 @@ public class Playlist {
     public void setGenerated(boolean generated) {
         this.generated = generated;
     }
+
+
 }

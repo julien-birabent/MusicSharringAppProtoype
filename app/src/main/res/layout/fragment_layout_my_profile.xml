@@ -1,6 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="2">
+
+        <ImageView
+            android:id="@+id/imageview_myprofile"
+            android:padding="5dp"
+            android:background="@android:color/transparent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="17dp"
+            app:srcCompat="@drawable/ic_thumb_myprofile" />
+
+        <TextView
+            android:id="@+id/textView_my_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="21dp"
+            android:text="Julien Birabent"
+            android:textColor="@color/_black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_above="@+id/textView_follower_my_profile"
+            android:layout_toEndOf="@+id/imageview_myprofile"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/textView_follower_my_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="77 Followers"
+            android:textColor="@color/_black"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/textView_my_profile_name" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_weight="3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp">
+
+
+        <RelativeLayout
+            android:id="@+id/myprofile_playlists_title"
+            android:background="@color/_yellow"
+            android:layout_width="match_parent"
+            android:layout_height="25dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="My Playlists"
+                android:textColor="@color/_black"
+                android:elevation="4dp"
+                android:textAlignment="center"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/myprofile_playlists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/myprofile_playlists_title">
+
+        </ListView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="3">
+
+        <RelativeLayout
+            android:id="@+id/myprofile_recommanded_title"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/_yellow">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:elevation="4dp"
+                android:text="My Playlists"
+                android:textAlignment="center"
+                android:textColor="@color/_black" />
+
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/myprofile_recommanded_playlists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/myprofile_recommanded_title">
+
+        </ListView>
+    </RelativeLayout>
 
 </LinearLayout>

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.listeners.SongActionManager;
 import julienbirabent.musicsharringappprotoype.models.Song;
 
 /**
@@ -69,6 +70,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         holder.position.setText(Integer.toString(position+1));
         holder.informations.setText(song.getName()+" - " + song.getArtist());
         holder.recommandations.setText(song.getUserRecommandationsFormatted());
+        holder.moreOptions.setOnClickListener(new SongActionManager(context));
 
         return row;
     }

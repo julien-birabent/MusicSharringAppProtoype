@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.listeners.PlaylistActionManager;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 
 /**
@@ -64,6 +65,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         if(playlist.isGenerated()){
             holder.nbSongs.setText(playlist.getSongs().length + " songs you never listened to.");
         }else holder.nbSongs.setText(playlist.getSongs().length + " songs.");
+        holder.moreOptions.setOnClickListener(new PlaylistActionManager(context));
 
 
         return row;

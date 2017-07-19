@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.transition.Slide;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import julienbirabent.musicsharringappprotoype.fragments.CustomPlaylistsFragment;
 import julienbirabent.musicsharringappprotoype.fragments.DisplayListContentFragment;
@@ -21,7 +23,7 @@ import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 import julienbirabent.musicsharringappprotoype.models.Song;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
 
 
 
@@ -131,9 +133,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             fragmentTransaction.commit();
 
         }
-
-
-
-
     }
+
 }

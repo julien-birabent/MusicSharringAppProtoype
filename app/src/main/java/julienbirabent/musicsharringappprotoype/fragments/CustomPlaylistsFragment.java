@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
@@ -44,8 +45,7 @@ public class CustomPlaylistsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
+        FragmentUtils.activateNaviguationBack(this,false);
         inflater.inflate(R.menu.custom_playlists_menu, menu);
     }
 

@@ -4,12 +4,6 @@
 
     <item
         android:icon="@drawable/ic_share"
-        android:title="Share"
-        android:visible="true"
-        app:showAsAction="always" />
-    <item
-
-        android:icon="@drawable/ic_gear"
-        android:title="Settings"
+        android:title="Share a song"
         app:showAsAction="always" />
 </menu>

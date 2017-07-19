@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
@@ -42,8 +43,7 @@ public class DisplayListContentFragment extends Fragment {
     public void onResume() {
         super.onResume();
 
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(true);
+        FragmentUtils.activateNaviguationBack(this,true);
 
         Bundle args = getArguments();
         Playlist playlistPassed =(Playlist) args.getSerializable("playlist");

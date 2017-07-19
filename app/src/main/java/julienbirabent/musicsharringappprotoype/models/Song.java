@@ -1,8 +1,12 @@
 package julienbirabent.musicsharringappprotoype.models;
 
+import android.support.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import julienbirabent.musicsharringappprotoype.R;
 
 /**
  * Created by Julien on 2017-07-18.
@@ -13,6 +17,7 @@ public class Song implements Serializable {
     private String artist;
     private String album;
     private String name;
+    private int albumVignetteId = -1;
     private ArrayList<String> userRecommandations;
 
 
@@ -26,6 +31,14 @@ public class Song implements Serializable {
         this.artist = artist;
         this.album = album;
         this.name = name;
+        this.userRecommandations = userRecommandations;
+    }
+
+    public Song(String artist, String album, String name,  int albumVignetteId, ArrayList<String> userRecommandations) {
+        this.artist = artist;
+        this.album = album;
+        this.name = name;
+        this.albumVignetteId = albumVignetteId;
         this.userRecommandations = userRecommandations;
     }
 
@@ -68,5 +81,22 @@ public class Song implements Serializable {
 
     }
 
+    public int getAlbumVignetteId() {
+        if(albumVignetteId == -1){
+            albumVignetteId = R.drawable.default_album_vignette;
+        }
+        return albumVignetteId;
+    }
 
+    public void setAlbumVignetteId(int albumVignetteId) {
+        this.albumVignetteId = albumVignetteId;
+    }
+
+    public ArrayList<String> getUserRecommandations() {
+        return userRecommandations;
+    }
+
+    public void setUserRecommandations(ArrayList<String> userRecommandations) {
+        this.userRecommandations = userRecommandations;
+    }
 }

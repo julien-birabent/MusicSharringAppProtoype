@@ -20,5 +20,9 @@ public class FragmentUtils {
 
     }
 
+    public static void changeActionBarTittle(Fragment fragment, String title){
+        ((AppCompatActivity) fragment.getActivity()).getSupportActionBar().setTitle(title);
+    }
+
 
 }

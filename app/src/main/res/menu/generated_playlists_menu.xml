@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:icon="@drawable/ic_share"
+        android:id="@+id/share_a_song"
+        android:icon="?android:attr/actionModeShareDrawable"
         android:title="Share"
         android:visible="true"
         app:showAsAction="always" />

@@ -60,6 +60,7 @@ public class GeneratedPlaylistsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         initPlaylists();
+        FragmentUtils.changeActionBarTittle(this,getString(R.string.title_generated_playlist));
     }
 
     @Override

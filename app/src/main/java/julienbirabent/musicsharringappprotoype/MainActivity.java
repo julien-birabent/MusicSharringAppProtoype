@@ -17,7 +17,9 @@ import julienbirabent.musicsharringappprotoype.fragments.CustomPlaylistsFragment
 import julienbirabent.musicsharringappprotoype.fragments.DisplayListContentFragment;
 import julienbirabent.musicsharringappprotoype.fragments.GeneratedPlaylistsFragment;
 import julienbirabent.musicsharringappprotoype.fragments.MyProfileFragment;
+import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
+import julienbirabent.musicsharringappprotoype.models.Song;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -92,20 +94,42 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+        // Lorsque le click vient d une vue contenant une Playlist
         if(adapterView.getAdapter().getItem(i) instanceof Playlist){
             Playlist playlistSelected =(Playlist) adapterView.getAdapter().getItem(i);
 
+            /* On passe la playlist sélectionnée en argument au fragment qui va en avoir besoin*/
             Bundle args = new Bundle();
             args.putSerializable("playlist", playlistSelected);
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+            /* Transaction de remplacement de fragment */
             DisplayListContentFragment displayListContentFragment =  new DisplayListContentFragment();
             displayListContentFragment.setArguments(args);
             fragmentTransaction.replace(R.id.content, displayListContentFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+
+            // Lorsque le click vient d une vue contenant une Song
+        }else if(adapterView.getAdapter().getItem(i) instanceof Song) {
+
+            Song song = (Song) adapterView.getAdapter().getItem(i);
+             /* On passe la playlist sélectionnée en argument au fragment qui va en avoir besoin*/
+            Bundle args = new Bundle();
+            args.putSerializable("song", song);
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            /* Transaction de remplacement de fragment */
+            SongDetailPageFragment songDetailPageFragment =  new SongDetailPageFragment();
+            songDetailPageFragment.setArguments(args);
+            fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+
         }
 
 

@@ -15,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
@@ -53,9 +54,12 @@ public class DisplayListContentFragment extends Fragment {
         Bundle args = getArguments();
         Playlist playlistPassed =(Playlist) args.getSerializable("playlist");
 
+        FragmentUtils.changeActionBarTittle(this, playlistPassed.getName());
+
         SongAdapter adapter = new SongAdapter(this.getActivity(), R.layout.playlist_content_row, playlistPassed.getSongs());
         songsList.setAdapter(adapter);
 
+        songsList.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
 
     }
 

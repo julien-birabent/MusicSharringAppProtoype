@@ -17,6 +17,7 @@ import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
+import julienbirabent.musicsharringappprotoype.models.Song;
 
 /**
  * Created by julbi on 2017-07-18.
@@ -68,6 +69,7 @@ public class CustomPlaylistsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         initPlaylists();
+        FragmentUtils.changeActionBarTittle(this,getString(R.string.title_custom_playlist));
 
     }
 

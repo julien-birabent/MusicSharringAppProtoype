@@ -1,5 +1,6 @@
 package julienbirabent.musicsharringappprotoype;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import julienbirabent.musicsharringappprotoype.models.Playlist;
@@ -62,13 +63,19 @@ public class MockUpContent {
 
     private void initRandomSongs(){
 
+        ArrayList<String> userRecommandations = new ArrayList<String>();
+        userRecommandations.add("Alex Martin");
+        userRecommandations.add( "Marc-Antoine Roberge");
+        userRecommandations.add("Justin Trudeau");
+        userRecommandations.add("President Obama");
+
         songs = new Song[]{
 
-                new Song("Gorrilaz", "Plastic Beach", "Broken"),
-                new Song("Gorrilaz", "Plastic Beach", "Cloud of unknowing"),
-                new Song("Gorrilaz", "Plastic Beach", "White flag"),
-                new Song("Gorrilaz", "Plastic Beach", "Empire Ants"),
-                new Song("Gorrilaz", "Plastic Beach", "Stylo"),
+                new Song("Gorrilaz", "Plastic Beach", "Broken",userRecommandations),
+                new Song("Gorrilaz", "Plastic Beach", "Cloud of unknowing",userRecommandations),
+                new Song("Gorrilaz", "Plastic Beach", "White flag",userRecommandations),
+                new Song("Gorrilaz", "Plastic Beach", "Empire Ants",userRecommandations),
+                new Song("Gorrilaz", "Plastic Beach", "Stylo",userRecommandations),
         };
     }
 

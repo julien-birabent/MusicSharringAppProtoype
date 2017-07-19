@@ -12,7 +12,6 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.fragments.CustomPlaylistsFragment;
 import julienbirabent.musicsharringappprotoype.fragments.DisplayListContentFragment;
@@ -104,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             DisplayListContentFragment displayListContentFragment =  new DisplayListContentFragment();
             displayListContentFragment.setArguments(args);
-            displayListContentFragment.setEnterTransition(new Slide(Gravity.LEFT));
             fragmentTransaction.replace(R.id.content, displayListContentFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();

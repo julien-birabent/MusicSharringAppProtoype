@@ -21,6 +21,7 @@ import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
+import julienbirabent.musicsharringappprotoype.adapter.SongAdapter;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 
 /**
@@ -28,6 +29,8 @@ import julienbirabent.musicsharringappprotoype.models.Playlist;
  */
 
 public class DisplayListContentFragment extends Fragment {
+
+    private ListView songsList;
 
     public DisplayListContentFragment() {
     }
@@ -45,8 +48,13 @@ public class DisplayListContentFragment extends Fragment {
 
         FragmentUtils.activateNaviguationBack(this,true);
 
+        songsList = (ListView) getActivity().findViewById(R.id.listView_playlist_content);
+
         Bundle args = getArguments();
         Playlist playlistPassed =(Playlist) args.getSerializable("playlist");
+
+        SongAdapter adapter = new SongAdapter(this.getActivity(), R.layout.playlist_content_row, playlistPassed.getSongs());
+        songsList.setAdapter(adapter);
 
 
     }
@@ -59,7 +67,8 @@ public class DisplayListContentFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
+        menu.clear();
+        inflater.inflate(R.menu.playlist_content_base_menu, menu);
     }
 
     @Override

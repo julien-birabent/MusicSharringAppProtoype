@@ -59,4 +59,10 @@ public class CustomPlaylistsFragment extends Fragment {
         playlists.setAdapter(adapter);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+    }
 }

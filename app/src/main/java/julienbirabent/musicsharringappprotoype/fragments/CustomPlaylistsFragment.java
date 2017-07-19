@@ -53,6 +53,11 @@ public class CustomPlaylistsFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
+    }
+
+    private void initPlaylists(){
+
         playlists = (ListView) this.getActivity().findViewById(R.id.listView_custom_playlists);
         playlists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getCustomPlaylistsMockUp());
@@ -62,7 +67,13 @@ public class CustomPlaylistsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        initPlaylists();
 
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        playlists.setAdapter(null);
     }
 }

@@ -23,6 +23,7 @@ import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 import julienbirabent.musicsharringappprotoype.adapter.SongAdapter;
+import julienbirabent.musicsharringappprotoype.listeners.SongActionManager;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 
 /**
@@ -59,7 +60,7 @@ public class DisplayListContentFragment extends Fragment {
         SongAdapter adapter = new SongAdapter(this.getActivity(), R.layout.playlist_content_row, playlistPassed.getSongs());
         songsList.setAdapter(adapter);
 
-        songsList.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        songsList.setOnItemClickListener(new SongActionManager(this.getActivity()));
 
     }
 

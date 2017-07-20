@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/song_detail"
+        android:title="View the song details" />
+    <item
         android:id="@+id/recommande_song"
         android:title="Recommande this song" />
     <item

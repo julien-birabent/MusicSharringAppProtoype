@@ -70,7 +70,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
         holder.position.setText(Integer.toString(position+1));
         holder.informations.setText(song.getName()+" - " + song.getArtist());
         holder.recommandations.setText(song.getUserRecommandationsFormatted());
-        holder.moreOptions.setOnClickListener(new SongActionManager(context));
+        holder.moreOptions.setOnClickListener(new SongActionManager(context,position));
 
         return row;
     }

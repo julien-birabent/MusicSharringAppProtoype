@@ -115,23 +115,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             fragmentTransaction.commit();
 
             // Lorsque le click vient d une vue contenant une Song
-        }else if(adapterView.getAdapter().getItem(i) instanceof Song) {
-
-            Song song = (Song) adapterView.getAdapter().getItem(i);
-             /* On passe la playlist sélectionnée en argument au fragment qui va en avoir besoin*/
-            Bundle args = new Bundle();
-            args.putSerializable("song", song);
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            /* Transaction de remplacement de fragment */
-            SongDetailPageFragment songDetailPageFragment =  new SongDetailPageFragment();
-            songDetailPageFragment.setArguments(args);
-            fragmentTransaction.replace(R.id.content, songDetailPageFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-
         }
     }
 

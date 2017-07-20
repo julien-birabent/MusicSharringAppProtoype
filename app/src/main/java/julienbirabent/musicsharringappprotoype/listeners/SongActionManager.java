@@ -50,36 +50,7 @@ public class SongActionManager implements View.OnClickListener,AdapterView.OnIte
                 switch (item.getItemId()){
 
                     case R.id.song_detail :
-
-
-                        try{
-                            final Activity activity = (Activity) context;
-
-                            ListView songList = (ListView) activity.findViewById(R.id.listView_playlist_content);
-                            Song song = (Song)songList.getAdapter().getItem(songId);
-
-                            FragmentManager fragmentManager;
-                            // Return the fragment manager
-                            fragmentManager =  activity.getFragmentManager();
-
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-                           /* Transaction de remplacement de fragment */
-                            SongDetailPageFragment songDetailPageFragment =  new SongDetailPageFragment();
-
-                            Bundle args = new Bundle();
-                            args.putSerializable("song", song);
-                            songDetailPageFragment.setArguments(args);
-                            fragmentTransaction.replace(R.id.content, songDetailPageFragment);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-
-                        } catch (ClassCastException e) {
-                            Log.d("SongActionManager", "Can't get the fragment manager with this");
-                        }
-
-
-
+                        showSongDetails();
                         break;
 
                     case R.id.recommande_song :
@@ -107,5 +78,33 @@ public class SongActionManager implements View.OnClickListener,AdapterView.OnIte
 
         /* TODO implémenter le code permettant de lire la chanson dans le player et de garder la trace de cette lecture*/
 
+    }
+
+    private void showSongDetails(){
+        try{
+        final Activity activity = (Activity) context;
+
+        ListView songList = (ListView) activity.findViewById(R.id.listView_playlist_content);
+        Song song = (Song)songList.getAdapter().getItem(songId);
+
+        FragmentManager fragmentManager;
+        // Return the fragment manager
+        fragmentManager =  activity.getFragmentManager();
+
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                           /* Transaction de remplacement de fragment */
+        SongDetailPageFragment songDetailPageFragment =  new SongDetailPageFragment();
+
+        Bundle args = new Bundle();
+        args.putSerializable("song", song);
+        songDetailPageFragment.setArguments(args);
+        fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+    } catch (ClassCastException e) {
+        Log.d("SongActionManager", "Can't get the fragment manager with this");
+    }
     }
 }

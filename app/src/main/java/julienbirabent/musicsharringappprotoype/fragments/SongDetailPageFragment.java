@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.R;
@@ -34,20 +36,37 @@ public class SongDetailPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.song_detail_page_fragment,container,false);
+        return inflater.inflate(R.layout.song_detail_page_fragment, container, false);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        FragmentUtils.activateNaviguationBack(this,true);
+        FragmentUtils.activateNaviguationBack(this, true);
 
         Bundle args = getArguments();
-        Song song =(Song) args.getSerializable("song");
+        Song song = (Song) args.getSerializable("song");
 
         FragmentUtils.changeActionBarTittle(this, getString(R.string.title_song_page));
 
+        displaySongDetails(song);
 
+
+    }
+
+    private void displaySongDetails(Song song) {
+
+        TextView title = ((TextView) getActivity().findViewById(R.id.song_page_title));
+        TextView artist = ((TextView) getActivity().findViewById(R.id.song_page_artist));
+        TextView album = ((TextView) getActivity().findViewById(R.id.song_page_album));
+        ImageView vignette = ((ImageView) getActivity().findViewById(R.id.song_page_vignette_album));
+        TextView recommandations = ((TextView) getActivity().findViewById(R.id.page_song_recommanded_by_label));
+
+        title.setText(song.getName());
+        artist.setText(song.getArtist());
+        album.setText(song.getAlbum());
+        vignette.setImageResource(song.getAlbumVignetteId());
+        recommandations.setText(song.getUserRecommandationsFormatted());
 
     }
 
@@ -64,7 +83,7 @@ public class SongDetailPageFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.popBackStack();

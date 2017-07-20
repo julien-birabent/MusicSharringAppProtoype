@@ -16,6 +16,7 @@ import android.widget.Toast;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Song;
+import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
 
 /**
  * Created by Julien on 2017-07-19.
@@ -74,9 +75,9 @@ public class SongActionManager implements View.OnClickListener,AdapterView.OnIte
 
         Song songSelected = (Song)adapterView.getAdapter().getItem(i);
 
-        Toast.makeText(context, "You want to play the song " + songSelected.getName(), Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(context, "You want to play the song " + songSelected.getName(), Toast.LENGTH_SHORT).show();
 
-        /* TODO implémenter le code permettant de lire la chanson dans le player et de garder la trace de cette lecture*/
+        MusicPlayer.getInstance().nextSong(songSelected);
 
     }
 

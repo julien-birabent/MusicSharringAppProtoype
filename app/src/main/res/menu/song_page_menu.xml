@@ -10,4 +10,7 @@
         android:icon="?attr/actionModeShareDrawable"
         android:title="Share this song"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/recommande_song"
+        android:title="Recommande this song" />
 </menu>

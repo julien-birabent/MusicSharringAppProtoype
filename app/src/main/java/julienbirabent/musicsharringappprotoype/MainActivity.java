@@ -13,6 +13,8 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import julienbirabent.musicsharringappprotoype.fragments.CustomPlaylistsFragment;
@@ -22,10 +24,11 @@ import julienbirabent.musicsharringappprotoype.fragments.MyProfileFragment;
 import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 import julienbirabent.musicsharringappprotoype.models.Song;
+import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener{
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-
+    private boolean isPlaying = true;
 
     protected Toolbar toolbar;
 
@@ -46,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     fragmentTransaction.replace(R.id.content, generatedPlaylistsFragment);
                     fragmentTransaction.commit();
 
-                return true;
+                    return true;
                 case R.id.custom_playlist:
                     toolbar.setTitle(R.string.title_custom_playlist);
 
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
 
         /* init the toolbar*/
-        toolbar =(Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle(R.string.title_generated_playlist);
 
@@ -91,14 +94,27 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         fragmentTransaction.add(R.id.content, generatedPlaylistsFragment);
         fragmentTransaction.commit();
 
+        ImageView buttonPlay = (ImageView) findViewById(R.id.audio_player_play);
+        buttonPlay.setOnClickListener(this);
+
+        ImageView buttonNext = (ImageView) findViewById(R.id.audio_player_next);
+        buttonNext.setOnClickListener(this);
+
+        ImageView buttonPrevious = (ImageView) findViewById(R.id.audio_player_previous);
+        buttonPrevious.setOnClickListener(this);
+
+        MusicPlayer musicPlayer = MusicPlayer.getInstance();
+        musicPlayer.initMusicPlayer(findViewById(R.id.audio_player_previous),findViewById(R.id.audio_player_play),
+                findViewById(R.id.audio_player_next), (TextView)findViewById(R.id.audio_player_song_title),(TextView)findViewById(R.id.audio_player_artist_name)
+        ,(TextView)findViewById(R.id.audio_player_album_titre),(ImageView)findViewById(R.id.thumbnail_playing_song));
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
         // Lorsque le click vient d une vue contenant une Playlist
-        if(adapterView.getAdapter().getItem(i) instanceof Playlist){
-            Playlist playlistSelected =(Playlist) adapterView.getAdapter().getItem(i);
+        if (adapterView.getAdapter().getItem(i) instanceof Playlist) {
+            Playlist playlistSelected = (Playlist) adapterView.getAdapter().getItem(i);
 
             /* On passe la playlist sélectionnée en argument au fragment qui va en avoir besoin*/
             Bundle args = new Bundle();
@@ -108,14 +124,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             /* Transaction de remplacement de fragment */
-            DisplayListContentFragment displayListContentFragment =  new DisplayListContentFragment();
+            DisplayListContentFragment displayListContentFragment = new DisplayListContentFragment();
             displayListContentFragment.setArguments(args);
             fragmentTransaction.replace(R.id.content, displayListContentFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
 
-            // Lorsque le click vient d une vue contenant une Song
         }
     }
 
+    @Override
+    public void onClick(View view) {
+
+        if (view.getId() == findViewById(R.id.audio_player_play).getId()) {
+
+            ImageView buttonPlay = (ImageView) findViewById(R.id.audio_player_play);
+
+            if (isPlaying == false) {
+                buttonPlay.setImageResource(R.drawable.ic_play_arrow);
+                isPlaying = true;
+            } else {
+                buttonPlay.setImageResource(R.drawable.ic_pause);
+                isPlaying = false;
+            }
+        }
+        if(view.getId() == findViewById(R.id.audio_player_next).getId()){
+            MusicPlayer.getInstance().nextSong();
+        }
+        if(view.getId() == findViewById(R.id.audio_player_previous).getId()){
+            MusicPlayer.getInstance().previousSong();
+        }
+
+    }
 }

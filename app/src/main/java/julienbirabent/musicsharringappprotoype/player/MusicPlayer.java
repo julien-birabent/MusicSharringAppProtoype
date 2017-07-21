@@ -2,6 +2,7 @@ package julienbirabent.musicsharringappprotoype.player;
 
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -9,17 +10,18 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
+import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.models.Song;
 
 /**
  * Created by Julien on 2017-07-20.
  */
 
-public class MusicPlayer {
+public class MusicPlayer implements View.OnClickListener {
 
-    private View previousButton;
-    private View pauseOrPlayButton;
-    private View nextButton;
+    private ImageButton previousButton;
+    private ImageButton pauseOrPlayButton;
+    private ImageButton nextButton;
 
     private TextView songTitle;
     private TextView songArtist;
@@ -28,6 +30,8 @@ public class MusicPlayer {
 
     private ArrayList<Song> songQueue = new ArrayList<Song>();
     private int queueIndex = 0;
+
+    private boolean isPlaying = true;
 
     private static MusicPlayer instance;
 
@@ -46,7 +50,7 @@ public class MusicPlayer {
         return instance;
     }
 
-    public void initMusicPlayer(View previousButton, View pauseOrPlayButton, View nextButton, TextView songTitle, TextView songArtist, TextView songAlbum, ImageView songVignette) {
+    public void initMusicPlayer(ImageButton  previousButton, ImageButton pauseOrPlayButton, ImageButton nextButton, TextView songTitle, TextView songArtist, TextView songAlbum, ImageView songVignette) {
         this.previousButton = previousButton;
         this.pauseOrPlayButton = pauseOrPlayButton;
         this.nextButton = nextButton;
@@ -54,20 +58,51 @@ public class MusicPlayer {
         this.songArtist = songArtist;
         this.songAlbum = songAlbum;
         this.songVignette = songVignette;
+
+        nextButton.setOnClickListener(this);
+        previousButton.setOnClickListener(this);
+        pauseOrPlayButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == pauseOrPlayButton) {
+
+            if (!isPlaying) {
+                pauseOrPlayButton.setImageResource(R.drawable.ic_play_arrow);
+                isPlaying = true;
+            } else {
+                pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
+                isPlaying = false;
+            }
+        }
+        if(view == nextButton){
+            MusicPlayer.getInstance().nextSong();
+        }
+        if(view == previousButton){
+            MusicPlayer.getInstance().previousSong();
+        }
+
     }
 
     public void nextSong(Song song){
 
+        if(songQueue.isEmpty()){
             displaySongInfos(song);
             songQueue.add(song);
-            queueIndex = songQueue.indexOf(song);
-
+        }else{
+            if(!song.equals(songQueue.get(queueIndex))){
+                displaySongInfos(song);
+                songQueue.add(song);
+                queueIndex++;
+            }
+        }
     }
 
     public void nextSong(){
         if(queueIndex+1 < songQueue.size()){
             displaySongInfos(songQueue.get(queueIndex+1));
-            queueIndex = songQueue.indexOf(songQueue.get(queueIndex+1));
+            queueIndex ++;
         }
 
     }
@@ -75,7 +110,7 @@ public class MusicPlayer {
     public  void previousSong(){
         if(queueIndex -1 >= 0){
             displaySongInfos(songQueue.get(queueIndex-1));
-            queueIndex = songQueue.indexOf(songQueue.get(queueIndex-1));
+            queueIndex--;
         }
 
     }
@@ -87,69 +122,6 @@ public class MusicPlayer {
         songVignette.setImageResource(song.getAlbumVignetteId());
     }
 
-    public View getPreviousButton() {
-        return previousButton;
-    }
-
-    public void setPreviousButton(View previousButton) {
-        this.previousButton = previousButton;
-    }
-
-    public View getPauseOrPlayButton() {
-        return pauseOrPlayButton;
-    }
-
-    public void setPauseOrPlayButton(View pauseOrPlayButton) {
-        this.pauseOrPlayButton = pauseOrPlayButton;
-    }
-
-    public View getNextButton() {
-        return nextButton;
-    }
-
-    public void setNextButton(View nextButton) {
-        this.nextButton = nextButton;
-    }
-
-    public TextView getSongTitle() {
-        return songTitle;
-    }
-
-    public void setSongTitle(TextView songTitle) {
-        this.songTitle = songTitle;
-    }
-
-    public TextView getSongArtist() {
-        return songArtist;
-    }
-
-    public void setSongArtist(TextView songArtist) {
-        this.songArtist = songArtist;
-    }
-
-    public TextView getSongAlbum() {
-        return songAlbum;
-    }
-
-    public void setSongAlbum(TextView songAlbum) {
-        this.songAlbum = songAlbum;
-    }
-
-    public ImageView getSongVignette() {
-        return songVignette;
-    }
-
-    public void setSongVignette(ImageView songVignette) {
-        this.songVignette = songVignette;
-    }
-
-    public ArrayList<Song> getSongQueue() {
-        return songQueue;
-    }
-
-    public void setSongQueue(ArrayList<Song> songQueue) {
-        this.songQueue = songQueue;
-    }
 
 
 }

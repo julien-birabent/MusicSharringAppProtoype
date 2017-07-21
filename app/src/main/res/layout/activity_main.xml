@@ -64,7 +64,7 @@
                 android:layout_alignTop="@+id/thumbnail_playing_song"
                 android:layout_toEndOf="@+id/thumbnail_playing_song"
                 android:layout_marginStart="3dp"
-                android:text="To Binge"
+                android:text="Select a song to play"
                 android:textColor="@color/_black" />
 
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_marginStart="3dp"
                 android:textSize="12sp"
                 android:textColor="@color/_black"
-                android:text="Gorrilaz" />
+                android:text="" />
 
             <TextView
                 android:id="@+id/audio_player_album_titre"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
                 android:textColor="@color/_black"
-                android:text="Plastic Beach"
+                android:text=""
                 android:layout_below="@id/audio_player_artist_name"
                 android:layout_marginStart="3dp"
                 android:layout_toEndOf="@id/thumbnail_playing_song" />

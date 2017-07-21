@@ -99,4 +99,25 @@ public class Song implements Serializable {
     public void setUserRecommandations(ArrayList<String> userRecommandations) {
         this.userRecommandations = userRecommandations;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Song song = (Song) o;
+
+        if (artist != null ? !artist.equals(song.artist) : song.artist != null) return false;
+        if (album != null ? !album.equals(song.album) : song.album != null) return false;
+        return name != null ? name.equals(song.name) : song.name == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = artist != null ? artist.hashCode() : 0;
+        result = 31 * result + (album != null ? album.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        return result;
+    }
 }

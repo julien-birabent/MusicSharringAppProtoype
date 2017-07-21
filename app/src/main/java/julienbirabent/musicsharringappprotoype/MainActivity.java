@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +27,8 @@ import julienbirabent.musicsharringappprotoype.models.Playlist;
 import julienbirabent.musicsharringappprotoype.models.Song;
 import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    private boolean isPlaying = true;
 
     protected Toolbar toolbar;
 
@@ -94,18 +94,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         fragmentTransaction.add(R.id.content, generatedPlaylistsFragment);
         fragmentTransaction.commit();
 
-        ImageView buttonPlay = (ImageView) findViewById(R.id.audio_player_play);
-        buttonPlay.setOnClickListener(this);
-
-        ImageView buttonNext = (ImageView) findViewById(R.id.audio_player_next);
-        buttonNext.setOnClickListener(this);
-
-        ImageView buttonPrevious = (ImageView) findViewById(R.id.audio_player_previous);
-        buttonPrevious.setOnClickListener(this);
-
         MusicPlayer musicPlayer = MusicPlayer.getInstance();
-        musicPlayer.initMusicPlayer(findViewById(R.id.audio_player_previous),findViewById(R.id.audio_player_play),
-                findViewById(R.id.audio_player_next), (TextView)findViewById(R.id.audio_player_song_title),(TextView)findViewById(R.id.audio_player_artist_name)
+        musicPlayer.initMusicPlayer((ImageButton) findViewById(R.id.audio_player_previous),(ImageButton)findViewById(R.id.audio_player_play),
+                (ImageButton)findViewById(R.id.audio_player_next), (TextView)findViewById(R.id.audio_player_song_title),(TextView)findViewById(R.id.audio_player_artist_name)
         ,(TextView)findViewById(R.id.audio_player_album_titre),(ImageView)findViewById(R.id.thumbnail_playing_song));
     }
 
@@ -133,27 +124,5 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    @Override
-    public void onClick(View view) {
 
-        if (view.getId() == findViewById(R.id.audio_player_play).getId()) {
-
-            ImageView buttonPlay = (ImageView) findViewById(R.id.audio_player_play);
-
-            if (isPlaying == false) {
-                buttonPlay.setImageResource(R.drawable.ic_play_arrow);
-                isPlaying = true;
-            } else {
-                buttonPlay.setImageResource(R.drawable.ic_pause);
-                isPlaying = false;
-            }
-        }
-        if(view.getId() == findViewById(R.id.audio_player_next).getId()){
-            MusicPlayer.getInstance().nextSong();
-        }
-        if(view.getId() == findViewById(R.id.audio_player_previous).getId()){
-            MusicPlayer.getInstance().previousSong();
-        }
-
-    }
 }

@@ -75,5 +75,18 @@ public class Playlist implements Serializable {
         return i;
     }
 
+    public Song[] getRecommandedSongs(){
+
+        ArrayList<Song> recommandedSongs = new ArrayList<Song>();
+
+        for(int i =0 ; i<songs.length ; i++){
+            if (songs[i].isRecommanded()){
+                recommandedSongs.add(songs[i]);
+            }
+        }
+        return (Song[])recommandedSongs.toArray();
+
+    }
+
 
 }

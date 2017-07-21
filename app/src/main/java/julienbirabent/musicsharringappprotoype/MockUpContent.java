@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import julienbirabent.musicsharringappprotoype.models.Playlist;
 import julienbirabent.musicsharringappprotoype.models.Song;
+import julienbirabent.musicsharringappprotoype.models.UserProfile;
 
 /**
  * Created by Julien on 2017-07-18.
@@ -17,6 +18,7 @@ public class MockUpContent {
     private static Playlist[] generatedPlaylists;
     private static Playlist[] customPlaylists;
     private static Song[]  songs;
+    private static UserProfile localUser;
 
 
     private MockUpContent() {
@@ -34,6 +36,13 @@ public class MockUpContent {
         }
         return instance;
     }
+
+    private void initLocalUser(){
+
+        localUser = new UserProfile("Julien Birabent", 5);
+        localUser.setPlaylists(customPlaylists);
+    }
+
 
     private void initGeneratedPlaylists(){
 

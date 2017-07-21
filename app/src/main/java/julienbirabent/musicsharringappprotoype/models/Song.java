@@ -20,6 +20,7 @@ public class Song implements Serializable {
     private int albumVignetteId = -1;
     private ArrayList<String> userRecommandations;
     private boolean listened = false;
+    private boolean recommanded = false;
 
 
     public Song(String artist, String album, String name) {
@@ -128,5 +129,13 @@ public class Song implements Serializable {
 
     public void setListened(boolean listened) {
         this.listened = listened;
+    }
+
+    public boolean isRecommanded() {
+        return recommanded;
+    }
+
+    public void setRecommanded(boolean recommanded) {
+        this.recommanded = recommanded;
     }
 }

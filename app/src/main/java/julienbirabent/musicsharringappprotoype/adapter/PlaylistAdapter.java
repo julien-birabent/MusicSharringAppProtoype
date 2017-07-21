@@ -63,7 +63,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
         holder.name.setText(playlist.getName());
         holder.vignette.setImageResource(playlist.getIdVignette());
         if(playlist.isGenerated()){
-            holder.nbSongs.setText(playlist.getSongs().length + " songs you never listened to.");
+            holder.nbSongs.setText(playlist.getNonListenedSongNumber() + " songs you never listened to.");
         }else holder.nbSongs.setText(playlist.getSongs().length + " songs.");
         holder.moreOptions.setOnClickListener(new PlaylistActionManager(context));
 

@@ -63,5 +63,17 @@ public class Playlist implements Serializable {
         this.generated = generated;
     }
 
+    public int getNonListenedSongNumber(){
+
+        int i = 0;
+
+        for(int z = 0 ; z < songs.length ; z++){
+            if (!songs[z].isListened()) {
+                i++;
+            }
+        }
+        return i;
+    }
+
 
 }

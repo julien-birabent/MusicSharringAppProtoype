@@ -27,9 +27,9 @@ import julienbirabent.musicsharringappprotoype.models.Playlist;
 import julienbirabent.musicsharringappprotoype.models.Song;
 import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
 
-
+    private ImageButton playerMoreOptions;
     protected Toolbar toolbar;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -95,9 +95,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         fragmentTransaction.commit();
 
         MusicPlayer musicPlayer = MusicPlayer.getInstance();
-        musicPlayer.initMusicPlayer((ImageButton) findViewById(R.id.audio_player_previous),(ImageButton)findViewById(R.id.audio_player_play),
-                (ImageButton)findViewById(R.id.audio_player_next), (TextView)findViewById(R.id.audio_player_song_title),(TextView)findViewById(R.id.audio_player_artist_name)
-        ,(TextView)findViewById(R.id.audio_player_album_titre),(ImageView)findViewById(R.id.thumbnail_playing_song));
+        musicPlayer.initMusicPlayer((ImageButton) findViewById(R.id.audio_player_previous), (ImageButton) findViewById(R.id.audio_player_play),
+                (ImageButton) findViewById(R.id.audio_player_next), (TextView) findViewById(R.id.audio_player_song_title), (TextView) findViewById(R.id.audio_player_artist_name)
+                , (TextView) findViewById(R.id.audio_player_album_titre), (ImageView) findViewById(R.id.thumbnail_playing_song));
+
+        playerMoreOptions = (ImageButton) findViewById(R.id.audio_player_more_options);
+        playerMoreOptions.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -122,6 +127,60 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             fragmentTransaction.commit();
 
         }
+    }
+
+    @Override
+
+    public void onClick(View view) {
+
+        if (view.getId() == playerMoreOptions.getId()) {
+            if(!(MusicPlayer.getInstance().getCurrentPlayingSong() == null)){
+                //Creating the instance of PopupMenu
+                PopupMenu popup = new PopupMenu(this, view);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.song_popup_menu, popup.getMenu());
+
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
+
+                        switch (item.getItemId()) {
+
+                            case R.id.song_detail:
+                                Song currentPlayingSong = MusicPlayer.getInstance().getCurrentPlayingSong();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                           /* Transaction de remplacement de fragment */
+                                SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
+
+                                Bundle args = new Bundle();
+                                args.putSerializable("song", currentPlayingSong);
+                                songDetailPageFragment.setArguments(args);
+                                fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                break;
+
+                            case R.id.recommande_song:
+                                break;
+
+                            case R.id.add_this_song:
+                                break;
+
+                        }
+
+
+                        return true;
+                    }
+                });
+
+                popup.show(); //showing popup menu
+            }
+
+        }
+
     }
 
 

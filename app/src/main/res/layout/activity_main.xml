@@ -59,12 +59,14 @@
 
             <TextView
                 android:id="@+id/audio_player_song_title"
-                android:layout_width="wrap_content"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/thumbnail_playing_song"
-                android:layout_toEndOf="@+id/thumbnail_playing_song"
                 android:layout_marginStart="3dp"
+                android:layout_toEndOf="@+id/thumbnail_playing_song"
+                android:ellipsize="end"
                 android:text="Select a song to play"
+                android:maxLines="1"
                 android:textColor="@color/_black" />
 
             <TextView

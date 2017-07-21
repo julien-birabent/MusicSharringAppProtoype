@@ -75,8 +75,6 @@ public class SongActionManager implements View.OnClickListener,AdapterView.OnIte
 
         Song songSelected = (Song)adapterView.getAdapter().getItem(i);
 
-      //  Toast.makeText(context, "You want to play the song " + songSelected.getName(), Toast.LENGTH_SHORT).show();
-
         MusicPlayer.getInstance().nextSong(songSelected);
 
     }

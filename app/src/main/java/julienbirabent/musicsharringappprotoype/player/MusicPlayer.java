@@ -1,5 +1,6 @@
 package julienbirabent.musicsharringappprotoype.player;
 
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -121,7 +122,15 @@ public class MusicPlayer implements View.OnClickListener {
         songArtist.setText(song.getArtist());
         songVignette.setImageResource(song.getAlbumVignetteId());
     }
+    @Nullable
+    public Song getCurrentPlayingSong(){
+        if(songQueue.isEmpty()){
+            return  null;
+        }else{
+            return songQueue.get(queueIndex);
+        }
 
+    }
 
 
 }

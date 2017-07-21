@@ -68,7 +68,7 @@ public class PlaylistAdapter extends ArrayAdapter<Playlist> {
             }else{
                 holder.nbSongs.setText(playlist.getNonListenedSongNumber() + " songs you never listened to.");
             }
-        }else holder.nbSongs.setText(playlist.getSongs().length + " songs.");
+        }else holder.nbSongs.setText(playlist.getNbOfSongs() + " songs.");
         holder.moreOptions.setOnClickListener(new PlaylistActionManager(context));
 
 

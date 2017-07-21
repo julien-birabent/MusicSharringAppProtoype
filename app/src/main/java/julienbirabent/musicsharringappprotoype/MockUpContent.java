@@ -25,6 +25,7 @@ public class MockUpContent {
         initRandomSongs();
         initGeneratedPlaylists();
         initCustomPlaylists();
+        initLocalUser();
     }
 
     public static MockUpContent getInstance()
@@ -98,4 +99,11 @@ public class MockUpContent {
         return customPlaylists;
     }
 
+    public static UserProfile getLocalUser() {
+        return localUser;
+    }
+
+    public static void setLocalUser(UserProfile localUser) {
+        MockUpContent.localUser = localUser;
+    }
 }

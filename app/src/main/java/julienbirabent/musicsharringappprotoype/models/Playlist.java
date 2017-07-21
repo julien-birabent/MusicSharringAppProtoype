@@ -2,18 +2,24 @@ package julienbirabent.musicsharringappprotoype.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  * Created by Julien on 2017-07-18.
  */
 
-public class Playlist implements Serializable {
+public class Playlist extends Observable implements Serializable {
 
     private Song[] songs;
     private String name;
     private int idVignette;
     private int nbOfSongs;
     private boolean generated;
+
+    public Playlist(String name, Song[] songs) {
+        this.name = name;
+        this.songs = songs;
+    }
 
     public Playlist(Song[]  songs, String name, int idVignette, int nbOfSongs, boolean generated) {
         this.songs = songs;
@@ -48,7 +54,12 @@ public class Playlist implements Serializable {
     }
 
     public int getNbOfSongs() {
-        return nbOfSongs;
+        if(songs == null){
+            return 0;
+        }else{
+            return songs.length;
+        }
+
     }
 
     public void setNbOfSongs(int nbOfSongs) {

@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     toolbar.setTitle(R.string.title_custom_playlist);
 
                     CustomPlaylistsFragment customPlaylistsFragment = new CustomPlaylistsFragment();
+                    MockUpContent.getLocalUser().addObserver(customPlaylistsFragment);
                     fragmentTransaction.replace(R.id.content, customPlaylistsFragment);
                     fragmentTransaction.commit();
 

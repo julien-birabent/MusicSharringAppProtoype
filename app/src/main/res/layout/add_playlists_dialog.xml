@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    >
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Enter the playlist name"
+        android:id="@+id/textView2"
+        android:layout_alignParentTop="true"
+        android:textColor="@color/_black"
+        android:textSize="18sp"
+        android:layout_alignStart="@+id/add_playlist_edittext" />
+
+    <EditText
+        android:id="@+id/add_playlist_edittext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="22dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text=""
+        android:hint="The playlist name"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:id="@+id/add_playlist_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_playlist_edittext"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="39dp"
+        android:layout_marginLeft="20dp"
+        android:background="@color/_yellow"
+        android:text="Cancel"
+        />
+
+    <Button
+        android:id="@+id/add_playlist_confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm"
+        android:layout_alignBaseline="@+id/add_playlist_cancel_btn"
+        android:background="@color/_yellow"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>

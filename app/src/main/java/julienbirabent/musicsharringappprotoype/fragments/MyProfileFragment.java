@@ -9,15 +9,24 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
+import julienbirabent.musicsharringappprotoype.models.Playlist;
 
 /**
  * Created by julbi on 2017-07-18.
  */
 
-public class MyProfileFragment extends Fragment {
+public class MyProfileFragment extends Fragment implements Observer {
 
+    private ListView myPlaylists;
 
     public MyProfileFragment() {
     }
@@ -41,6 +50,31 @@ public class MyProfileFragment extends Fragment {
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowHomeEnabled(false);
         inflater.inflate(R.menu.my_profile_menu, menu);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        myPlaylists = (ListView) this.getActivity().findViewById(R.id.myprofile_playlists);
+        myPlaylists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
+        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getLocalUser().getPlaylists());
+        myPlaylists.setAdapter(adapter);
+
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        myPlaylists.setAdapter(null);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if(o instanceof Playlist[]){
+            PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, (Playlist[]) o);
+            myPlaylists.setAdapter(adapter);
+        }
     }
 }
 

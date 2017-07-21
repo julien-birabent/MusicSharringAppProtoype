@@ -69,13 +69,17 @@ public class MusicPlayer implements View.OnClickListener {
     public void onClick(View view) {
         if (view == pauseOrPlayButton) {
 
-            if (!isPlaying) {
-                pauseOrPlayButton.setImageResource(R.drawable.ic_play_arrow);
-                isPlaying = true;
-            } else {
-                pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
-                isPlaying = false;
+            if(!songQueue.isEmpty()){
+                if (!isPlaying) {
+                    pauseOrPlayButton.setImageResource(R.drawable.ic_play_arrow);
+                    isPlaying = true;
+                } else {
+                    pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
+                    isPlaying = false;
+                }
             }
+
+
         }
         if(view == nextButton){
             MusicPlayer.getInstance().nextSong();

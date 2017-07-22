@@ -3,6 +3,7 @@ package julienbirabent.musicsharringappprotoype.fragments;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
@@ -25,14 +29,16 @@ import julienbirabent.musicsharringappprotoype.adapter.PlaylistAdapter;
 import julienbirabent.musicsharringappprotoype.adapter.SongAdapter;
 import julienbirabent.musicsharringappprotoype.listeners.SongActionManager;
 import julienbirabent.musicsharringappprotoype.models.Playlist;
+import julienbirabent.musicsharringappprotoype.models.Song;
 
 /**
  * Created by Julien on 2017-07-18.
  */
 
-public class DisplayListContentFragment extends Fragment {
+public class DisplayListContentFragment extends Fragment implements Observer{
 
     private ListView songsList;
+    private Context context;
 
     public DisplayListContentFragment() {
     }
@@ -41,6 +47,13 @@ public class DisplayListContentFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
 
     }
 
@@ -57,7 +70,7 @@ public class DisplayListContentFragment extends Fragment {
 
         FragmentUtils.changeActionBarTittle(this, playlistPassed.getName());
 
-        SongAdapter adapter = new SongAdapter(this.getActivity(), R.layout.playlist_content_row, playlistPassed.getSongs());
+        SongAdapter adapter = new SongAdapter(context, R.layout.playlist_content_row, playlistPassed.getSongs());
         songsList.setAdapter(adapter);
 
         songsList.setOnItemClickListener(new SongActionManager(this.getActivity()));
@@ -97,5 +110,14 @@ public class DisplayListContentFragment extends Fragment {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        if(o instanceof Playlist){
+            songsList.setAdapter(null);
+            SongAdapter adapter = new SongAdapter(context, R.layout.playlist_content_row, ((Playlist) o).getSongs());
+            songsList.setAdapter(adapter);
+        }
     }
 }

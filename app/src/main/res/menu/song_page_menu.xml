@@ -12,5 +12,6 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/recommande_song"
+        android:checkable="true"
         android:title="Recommande this song" />
 </menu>

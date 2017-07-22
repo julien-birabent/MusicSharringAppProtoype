@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ImageButton playerMoreOptions;
     protected Toolbar toolbar;
+    private PopupMenu popup;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -123,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             /* Transaction de remplacement de fragment */
             DisplayListContentFragment displayListContentFragment = new DisplayListContentFragment();
+            playlistSelected.addObserver(displayListContentFragment);
             displayListContentFragment.setArguments(args);
             fragmentTransaction.replace(R.id.content, displayListContentFragment);
             fragmentTransaction.addToBackStack(null);
@@ -136,53 +138,87 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onClick(View view) {
 
         if (view.getId() == playerMoreOptions.getId()) {
-            if(!(MusicPlayer.getInstance().getCurrentPlayingSong() == null)){
-                //Creating the instance of PopupMenu
-                PopupMenu popup = new PopupMenu(this, view);
-                //Inflating the Popup using xml file
-                popup.getMenuInflater()
-                        .inflate(R.menu.song_popup_menu, popup.getMenu());
+            if (!(MusicPlayer.getInstance().getCurrentPlayingSong() == null)) {
 
-                //registering popup with OnMenuItemClickListener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    public boolean onMenuItemClick(MenuItem item) {
+                if (popup == null) {
+                    popup = new PopupMenu(this, view);
+                    //Inflating the Popup using xml file
+                    popup.getMenuInflater()
+                            .inflate(R.menu.song_popup_menu, popup.getMenu());
 
-                        switch (item.getItemId()) {
+                    MenuItem recommandItem = popup.getMenu().findItem(R.id.recommande_song);
 
-                            case R.id.song_detail:
-                                Song currentPlayingSong = MusicPlayer.getInstance().getCurrentPlayingSong();
-                                FragmentManager fragmentManager = getFragmentManager();
-                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    if (MusicPlayer.getInstance().getCurrentPlayingSong().isRecommanded()) {
+                        recommandItem.setTitle(R.string.popmenu_unrecommand_this_song);
+                        recommandItem.setChecked(true);
+                    } else {
+                        recommandItem.setTitle(R.string.popmenu_recommand_this_song);
+                        recommandItem.setChecked(false);
+                    }
+
+                    //registering popup with OnMenuItemClickListener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+
+                                case R.id.song_detail:
+                                    Song currentPlayingSong = MusicPlayer.getInstance().getCurrentPlayingSong();
+                                    FragmentManager fragmentManager = getFragmentManager();
+                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                            /* Transaction de remplacement de fragment */
-                                SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
+                                    SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
 
-                                Bundle args = new Bundle();
-                                args.putSerializable("song", currentPlayingSong);
-                                songDetailPageFragment.setArguments(args);
-                                fragmentTransaction.replace(R.id.content, songDetailPageFragment);
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
-                                break;
+                                    Bundle args = new Bundle();
+                                    args.putSerializable("song", currentPlayingSong);
+                                    songDetailPageFragment.setArguments(args);
+                                    fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+                                    break;
 
-                            case R.id.recommande_song:
-                                break;
+                                case R.id.recommande_song:
 
-                            case R.id.add_this_song:
-                                break;
+                                    if(!item.isChecked()){
+                                        recommandASong(MusicPlayer.getInstance().getCurrentPlayingSong());
+                                        item.setTitle(R.string.popmenu_unrecommand_this_song);
+                                        item.setChecked(true);
+                                    }else{
+                                        unrecommandeSong(MusicPlayer.getInstance().getCurrentPlayingSong());
+                                        item.setTitle(R.string.popmenu_recommand_this_song);
+                                        item.setChecked(false);
+                                    }
 
+
+                                    break;
+
+                                case R.id.add_this_song:
+                                    break;
+
+                            }
+
+
+                            return true;
                         }
-
-
-                        return true;
-                    }
-                });
-
+                    });
+                }
                 popup.show(); //showing popup menu
             }
 
         }
 
+    }
+
+    private void unrecommandeSong(Song song){
+        song.setRecommanded(false);
+        MockUpContent.getLocalUser().deleteRecommandedSong(song);
+
+    }
+
+    private void recommandASong(Song song) {
+        song.setRecommanded(true);
+        MockUpContent.getLocalUser().addRecommandedSong(song);
     }
 
 

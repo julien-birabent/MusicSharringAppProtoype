@@ -2,6 +2,7 @@ package julienbirabent.musicsharringappprotoype.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observable;
 
 /**
@@ -96,6 +97,28 @@ public class Playlist extends Observable implements Serializable {
             }
         }
         return (Song[])recommandedSongs.toArray();
+
+    }
+
+    public void addSong(Song song){
+
+        ArrayList<Song> songList = new ArrayList<Song>(Arrays.asList(songs));
+        songList.add(song);
+        songs = new Song[songList.size()];
+        songs = (Song[]) songList.toArray(songs);
+        setChanged();
+        notifyObservers(this);
+
+    }
+
+    public void removeSong(Song song){
+
+        ArrayList<Song> songList = new ArrayList<Song>(Arrays.asList(songs));
+        songList.remove(song);
+        songs = new Song[songList.size()];
+        songs = (Song[]) songList.toArray(songs);
+        setChanged();
+        notifyObservers(this);
 
     }
 

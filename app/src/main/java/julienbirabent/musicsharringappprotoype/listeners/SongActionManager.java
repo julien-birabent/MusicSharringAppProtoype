@@ -80,9 +80,11 @@ public class SongActionManager implements View.OnClickListener, AdapterView.OnIt
 
                         case R.id.add_this_song:
                             break;
+                        case R.id.delete_song:
+                            break;
 
                     }
-                    
+
                     return true;
                 }
             });

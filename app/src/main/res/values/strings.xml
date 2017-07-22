@@ -20,5 +20,6 @@
     <string name="comment_section">Comments section</string>
 
     <string name="popmenu_recommand_this_song">Recommande this song</string>
+    <string name="popmenu_delete_song">Delete</string>
     <string name="popmenu_unrecommand_this_song">Unrecommande this song</string>
 </resources>

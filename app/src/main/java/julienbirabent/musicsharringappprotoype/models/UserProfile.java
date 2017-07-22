@@ -59,6 +59,7 @@ public class UserProfile extends Observable{
 
         ArrayList<Playlist> playlistsList = new ArrayList<Playlist>(Arrays.asList(playlists));
         playlistsList.add(playlist);
+        playlists = new Playlist[playlistsList.size()];
         playlists = (Playlist[]) playlistsList.toArray(playlists);
         setChanged();
         notifyObservers(playlists);
@@ -78,6 +79,7 @@ public class UserProfile extends Observable{
     public void addRecommandedSong(Song song){
         ArrayList<Song> songArrayList = new ArrayList<Song>(Arrays.asList(recommandedSongs));
         songArrayList.add(song);
+        recommandedSongs = new Song[songArrayList.size()];
         recommandedSongs = (Song[]) songArrayList.toArray(recommandedSongs);
         setChanged();
         notifyObservers(recommandedSongs);

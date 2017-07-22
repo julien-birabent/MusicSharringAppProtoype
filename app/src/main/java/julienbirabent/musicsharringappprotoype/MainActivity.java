@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     toolbar.setTitle(R.string.title_profile);
 
                     MyProfileFragment myProfileFragment = new MyProfileFragment();
+                    MockUpContent.getLocalUser().addObserver(myProfileFragment);
                     fragmentTransaction.replace(R.id.content, myProfileFragment);
                     fragmentTransaction.commit();
 

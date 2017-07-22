@@ -147,7 +147,6 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
     @Override
     public void update(Observable observable, Object o) {
         if(o instanceof Playlist[] && o != null && playlists!= null){
-
             initPlaylists(context);
         }
     }

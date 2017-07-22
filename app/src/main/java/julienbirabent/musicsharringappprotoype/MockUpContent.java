@@ -18,6 +18,7 @@ public class MockUpContent {
     private static Playlist[] generatedPlaylists;
     private static Playlist[] customPlaylists;
     private static Song[]  songs;
+    private static Song[] recommandedSongs= new Song[0];
     private static UserProfile localUser;
 
 
@@ -42,6 +43,7 @@ public class MockUpContent {
 
         localUser = new UserProfile("Julien Birabent", 5);
         localUser.setPlaylists(customPlaylists);
+        localUser.setRecommandedSongs(recommandedSongs);
     }
 
 

@@ -4,6 +4,7 @@ import android.support.annotation.Nullable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
 import java.util.StringTokenizer;
 
 import julienbirabent.musicsharringappprotoype.R;
@@ -12,7 +13,7 @@ import julienbirabent.musicsharringappprotoype.R;
  * Created by Julien on 2017-07-18.
  */
 
-public class Song implements Serializable {
+public class Song extends Observable implements Serializable  {
 
     private String artist;
     private String album;
@@ -137,5 +138,7 @@ public class Song implements Serializable {
 
     public void setRecommanded(boolean recommanded) {
         this.recommanded = recommanded;
+        setChanged();
+        notifyObservers(this);
     }
 }

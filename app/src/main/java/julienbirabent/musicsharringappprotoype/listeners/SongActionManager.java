@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
 import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Song;
@@ -22,14 +23,15 @@ import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
  * Created by Julien on 2017-07-19.
  */
 
-public class SongActionManager implements View.OnClickListener,AdapterView.OnItemClickListener {
+public class SongActionManager implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private Context context;
-    private int songId;
+    private Song song;
+    private PopupMenu popup;
 
-    public SongActionManager(Context context, int songId) {
+    public SongActionManager(Context context, Song song) {
         this.context = context;
-        this.songId = songId;
+        this.song = song;
     }
 
     public SongActionManager(Context context) {
@@ -37,74 +39,101 @@ public class SongActionManager implements View.OnClickListener,AdapterView.OnIte
     }
 
     @Override
-    public void onClick(final View view) {
+    public void onClick( View view) {
         //Creating the instance of PopupMenu
-        PopupMenu popup = new PopupMenu(context, view);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater()
-                .inflate(R.menu.song_popup_menu, popup.getMenu());
+        if(popup== null){
+            popup = new PopupMenu(context, view);
+            //Inflating the Popup using xml file
+            popup.getMenuInflater()
+                    .inflate(R.menu.song_popup_menu, popup.getMenu());
 
-        //registering popup with OnMenuItemClickListener
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
+            MenuItem recommandItem = popup.getMenu().findItem(R.id.recommande_song);
 
-                switch (item.getItemId()){
-
-                    case R.id.song_detail :
-                        showSongDetails();
-                        break;
-
-                    case R.id.recommande_song :
-                        break;
-
-                    case R.id.add_this_song :
-                        break;
-
-                }
-
-
-                return true;
+            if(song.isRecommanded()){
+                recommandItem.setTitle(R.string.popmenu_unrecommand_this_song);
+                recommandItem.setChecked(true);
+            }else{
+                recommandItem.setTitle(R.string.popmenu_recommand_this_song);
+                recommandItem.setChecked(false);
             }
-        });
 
+            //registering popup with OnMenuItemClickListener
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                public boolean onMenuItemClick(MenuItem item) {
+
+                    switch (item.getItemId()) {
+
+                        case R.id.song_detail:
+                            showSongDetails();
+                            break;
+
+                        case R.id.recommande_song:
+                            if(!item.isChecked()){
+                                recommandASong();
+                                item.setChecked(true);
+                            }else{
+                                unrecommandeSong();
+                                item.setChecked(false);
+                            }
+
+                            break;
+
+                        case R.id.add_this_song:
+                            break;
+
+                    }
+                    
+                    return true;
+                }
+            });
+        }
         popup.show(); //showing popup menu
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-        Song songSelected = (Song)adapterView.getAdapter().getItem(i);
+        if(adapterView.getAdapter().getItem(i)!= null){
+            Song songSelected = (Song) adapterView.getAdapter().getItem(i);
+            MusicPlayer.getInstance().nextSong(songSelected);
+            songSelected.setListened(true);
+        }
+    }
 
-        MusicPlayer.getInstance().nextSong(songSelected);
-        songSelected.setListened(true);
+    private void unrecommandeSong(){
+        song.setRecommanded(false);
+        MockUpContent.getLocalUser().deleteRecommandedSong(song);
 
     }
 
-    private void showSongDetails(){
-        try{
-        final Activity activity = (Activity) context;
+    private void recommandASong() {
+        song.setRecommanded(true);
+        MockUpContent.getLocalUser().addRecommandedSong(song);
+    }
 
-        ListView songList = (ListView) activity.findViewById(R.id.listView_playlist_content);
-        Song song = (Song)songList.getAdapter().getItem(songId);
+    private void showSongDetails() {
+        try {
+            Activity activity = (Activity) context;
 
-        FragmentManager fragmentManager;
-        // Return the fragment manager
-        fragmentManager =  activity.getFragmentManager();
+            FragmentManager fragmentManager;
+            // Return the fragment manager
+            fragmentManager = activity.getFragmentManager();
 
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                            /* Transaction de remplacement de fragment */
-        SongDetailPageFragment songDetailPageFragment =  new SongDetailPageFragment();
+            SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
 
-        Bundle args = new Bundle();
-        args.putSerializable("song", song);
-        songDetailPageFragment.setArguments(args);
-        fragmentTransaction.replace(R.id.content, songDetailPageFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+            Bundle args = new Bundle();
+            args.putSerializable("song", song);
+            songDetailPageFragment.setArguments(args);
+            fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
 
-    } catch (ClassCastException e) {
-        Log.d("SongActionManager", "Can't get the fragment manager with this");
+        } catch (ClassCastException e) {
+            Log.d("SongActionManager", "Can't get the fragment manager with this");
+        }
     }
-    }
+
 }

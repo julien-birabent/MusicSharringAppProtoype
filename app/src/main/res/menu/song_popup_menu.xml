@@ -7,8 +7,11 @@
         android:title="View the song details" />
     <item
         android:id="@+id/recommande_song"
-        android:title="Recommande this song" />
+        android:checkable="true"
+        android:checked="false"
+        android:title="@string/popmenu_recommand_this_song" />
     <item
         android:id="@+id/add_this_song"
         android:title="add this song to..." />
+
 </menu>

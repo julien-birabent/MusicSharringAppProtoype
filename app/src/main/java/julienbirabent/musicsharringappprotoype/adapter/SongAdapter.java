@@ -89,8 +89,10 @@ public class SongAdapter extends ArrayAdapter<Song> {
             holder.moreOptions.setOnClickListener(new SongActionManager(context,song));
 
             if(fromGeneratedPlaylist){
-                if(song.isListened()){
+                if(!song.isListened()){
                     holder.listenedIndicator.setVisibility(View.VISIBLE);
+                }else{
+                    holder.listenedIndicator.setVisibility(View.GONE);
                 }
             }else{
                 holder.listenedIndicator.setVisibility(View.GONE);

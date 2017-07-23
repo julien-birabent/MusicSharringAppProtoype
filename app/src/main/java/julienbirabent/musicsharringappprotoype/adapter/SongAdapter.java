@@ -26,12 +26,14 @@ public class SongAdapter extends ArrayAdapter<Song> {
     private Context context;
     private int resourceId;
     private Song[] data = null;
+    private boolean fromGeneratedPlaylist = false;
 
     private static class SongHolder{
         TextView position;
         TextView informations;
         TextView recommandations;
         ImageButton moreOptions;
+        ImageView listenedIndicator;
     }
     
     public SongAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull Song[] objects) {
@@ -41,6 +43,17 @@ public class SongAdapter extends ArrayAdapter<Song> {
         this.resourceId = resource;
         this.data = objects;
     }
+
+    public SongAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull Song[] objects, boolean fromGeneratedPlaylist) {
+        super(context, resource, objects);
+
+        this.context = context;
+        this.resourceId = resource;
+        this.data = objects;
+        this.fromGeneratedPlaylist = fromGeneratedPlaylist;
+    }
+
+
 
     @NonNull
     @Override
@@ -58,6 +71,7 @@ public class SongAdapter extends ArrayAdapter<Song> {
             holder.informations = (TextView)row.findViewById(R.id.song_basic_informations);
             holder.recommandations = (TextView) row.findViewById(R.id.song_recommandations);
             holder.moreOptions = (ImageButton) row.findViewById(R.id.playlist_content_more_options);
+            holder.listenedIndicator = (ImageView)  row.findViewById(R.id.listened_indicator);
 
             row.setTag(holder);
 
@@ -73,6 +87,12 @@ public class SongAdapter extends ArrayAdapter<Song> {
             holder.informations.setText(song.getName()+" - " + song.getArtist());
             holder.recommandations.setText(song.getUserRecommandationsFormatted());
             holder.moreOptions.setOnClickListener(new SongActionManager(context,song));
+
+            if(fromGeneratedPlaylist){
+                if(song.isListened()){
+                    holder.listenedIndicator.setVisibility(View.VISIBLE);
+                }
+            }
         }
 
         return row;

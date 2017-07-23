@@ -124,6 +124,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             /* On passe la playlist sélectionnée en argument au fragment qui va en avoir besoin*/
             Bundle args = new Bundle();
             args.putSerializable("playlist", playlistSelected);
+            if(playlistSelected.isGenerated()){
+                args.putBoolean("generated", true);
+            }else{
+                args.putBoolean("generated", false);
+            }
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

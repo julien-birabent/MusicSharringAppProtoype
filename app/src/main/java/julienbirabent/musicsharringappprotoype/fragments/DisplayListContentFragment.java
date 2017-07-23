@@ -67,10 +67,12 @@ public class DisplayListContentFragment extends Fragment implements Observer{
 
         Bundle args = getArguments();
         Playlist playlistPassed =(Playlist) args.getSerializable("playlist");
+        boolean generated = args.getBoolean("generated");
+
 
         FragmentUtils.changeActionBarTittle(this, playlistPassed.getName());
 
-        SongAdapter adapter = new SongAdapter(context, R.layout.playlist_content_row, playlistPassed.getSongs());
+        SongAdapter adapter = new SongAdapter(context, R.layout.playlist_content_row, playlistPassed.getSongs(),generated);
         songsList.setAdapter(adapter);
 
         songsList.setOnItemClickListener(new SongActionManager(this.getActivity()));

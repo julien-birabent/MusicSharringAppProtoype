@@ -53,5 +53,16 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 
+    <ImageView
+        android:id="@+id/listened_indicator"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/playlist_content_more_options"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        android:layout_toStartOf="@+id/playlist_content_more_options"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_listened" />
+
 
 </RelativeLayout>

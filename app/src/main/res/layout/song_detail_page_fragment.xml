@@ -88,18 +88,18 @@
             <Button
                 android:id="@+id/song_page_view_all_recommandations"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_alignBottom="@+id/page_song_recommanded_by_label"
+                android:layout_height="wrap_content"
+
                 android:layout_alignParentEnd="true"
                 android:layout_below="@id/relativeLayout"
                 android:layout_marginEnd="20dp"
                 android:layout_marginTop="10dp"
-                android:background="@color/_light_purple"
+                android:background="@drawable/rounded_button"
                 android:text="View all"
                 android:textAlignment="center"
                 android:textAllCaps="false"
-                android:textColor="@color/_purple"
-                android:textSize="14sp" />
+                android:textColor="@android:color/white"
+                android:textSize="18sp" />
 
             <RelativeLayout
                 android:id="@+id/song_page_label_comments_section"

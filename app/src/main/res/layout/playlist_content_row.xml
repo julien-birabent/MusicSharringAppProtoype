@@ -6,15 +6,15 @@
 
     <TextView
         android:id="@+id/song_position_in_list"
-        android:layout_width="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:textAlignment="center"
         android:gravity="center"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:text="1"
+        android:text=""
         android:textColor="@color/_black"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp" />
@@ -24,21 +24,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Basic informations about the song"
-        android:layout_marginLeft="5dp"
+        android:layout_marginLeft="35dp"
         android:textColor="@color/_black"
         android:textSize="16sp"
         android:layout_alignTop="@+id/song_position_in_list"
-        android:layout_toEndOf="@+id/song_position_in_list"
-        android:layout_marginStart="11dp" />
+        android:layout_alignParentLeft="true"
+        />
 
     <TextView
         android:id="@+id/song_recommandations"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/song_position_in_list"
         android:layout_alignStart="@+id/song_basic_informations"
-        android:layout_marginTop="3dp"
         android:layout_marginEnd="35dp"
+        android:layout_marginTop="3dp"
         android:text="Recommanded by..."
         android:textSize="12sp" />
 

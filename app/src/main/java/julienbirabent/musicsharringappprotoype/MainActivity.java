@@ -13,6 +13,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private ImageButton playerMoreOptions;
     protected Toolbar toolbar;
     private PopupMenu popup;
+    private FrameLayout content;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -45,18 +47,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             switch (item.getItemId()) {
                 case R.id.generated_playlist:
                     toolbar.setTitle(R.string.title_generated_playlist);
-
                     GeneratedPlaylistsFragment generatedPlaylistsFragment = new GeneratedPlaylistsFragment();
                     fragmentTransaction.replace(R.id.content, generatedPlaylistsFragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
                     return true;
                 case R.id.custom_playlist:
                     toolbar.setTitle(R.string.title_custom_playlist);
-
                     CustomPlaylistsFragment customPlaylistsFragment = new CustomPlaylistsFragment();
                     MockUpContent.getLocalUser().addObserver(customPlaylistsFragment);
                     fragmentTransaction.replace(R.id.content, customPlaylistsFragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
                     return true;
@@ -66,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     MyProfileFragment myProfileFragment = new MyProfileFragment();
                     MockUpContent.getLocalUser().addObserver(myProfileFragment);
                     fragmentTransaction.replace(R.id.content, myProfileFragment);
+                    fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
                     return true;
@@ -79,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        content = (FrameLayout) findViewById(R.id.content);
+
 
         /* init the toolbar*/
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -140,69 +146,67 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (view.getId() == playerMoreOptions.getId()) {
             if (!(MusicPlayer.getInstance().getCurrentPlayingSong() == null)) {
 
-                if (popup == null) {
-                    popup = new PopupMenu(this, view);
-                    //Inflating the Popup using xml file
-                    popup.getMenuInflater()
-                            .inflate(R.menu.song_popup_menu, popup.getMenu());
 
-                    MenuItem recommandItem = popup.getMenu().findItem(R.id.recommande_song);
+                popup = new PopupMenu(this, view);
+                //Inflating the Popup using xml file
+                popup.getMenuInflater()
+                        .inflate(R.menu.song_popup_menu, popup.getMenu());
 
-                    if (MusicPlayer.getInstance().getCurrentPlayingSong().isRecommanded()) {
-                        recommandItem.setTitle(R.string.popmenu_unrecommand_this_song);
-                        recommandItem.setChecked(true);
-                    } else {
-                        recommandItem.setTitle(R.string.popmenu_recommand_this_song);
-                        recommandItem.setChecked(false);
-                    }
+                MenuItem recommandItem = popup.getMenu().findItem(R.id.recommande_song);
 
-                    //registering popup with OnMenuItemClickListener
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        public boolean onMenuItemClick(MenuItem item) {
+                if (MusicPlayer.getInstance().getCurrentPlayingSong().isRecommanded()) {
+                    recommandItem.setTitle(R.string.popmenu_unrecommand_this_song);
+                    recommandItem.setChecked(true);
+                } else {
+                    recommandItem.setTitle(R.string.popmenu_recommand_this_song);
+                    recommandItem.setChecked(false);
+                }
 
-                            switch (item.getItemId()) {
+                //registering popup with OnMenuItemClickListener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    public boolean onMenuItemClick(MenuItem item) {
 
-                                case R.id.song_detail:
-                                    Song currentPlayingSong = MusicPlayer.getInstance().getCurrentPlayingSong();
-                                    FragmentManager fragmentManager = getFragmentManager();
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        switch (item.getItemId()) {
+
+                            case R.id.song_detail:
+                                Song currentPlayingSong = MusicPlayer.getInstance().getCurrentPlayingSong();
+                                FragmentManager fragmentManager = getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
                            /* Transaction de remplacement de fragment */
-                                    SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
+                                SongDetailPageFragment songDetailPageFragment = new SongDetailPageFragment();
 
-                                    Bundle args = new Bundle();
-                                    args.putSerializable("song", currentPlayingSong);
-                                    songDetailPageFragment.setArguments(args);
-                                    fragmentTransaction.replace(R.id.content, songDetailPageFragment);
-                                    fragmentTransaction.addToBackStack(null);
-                                    fragmentTransaction.commit();
-                                    break;
+                                Bundle args = new Bundle();
+                                args.putSerializable("song", currentPlayingSong);
+                                songDetailPageFragment.setArguments(args);
+                                fragmentTransaction.replace(R.id.content, songDetailPageFragment);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                                break;
 
-                                case R.id.recommande_song:
+                            case R.id.recommande_song:
 
-                                    if(!item.isChecked()){
-                                        recommandASong(MusicPlayer.getInstance().getCurrentPlayingSong());
-                                        item.setTitle(R.string.popmenu_unrecommand_this_song);
-                                        item.setChecked(true);
-                                    }else{
-                                        unrecommandeSong(MusicPlayer.getInstance().getCurrentPlayingSong());
-                                        item.setTitle(R.string.popmenu_recommand_this_song);
-                                        item.setChecked(false);
-                                    }
+                                if (!item.isChecked()) {
+                                    recommandASong(MusicPlayer.getInstance().getCurrentPlayingSong());
+                                    item.setTitle(R.string.popmenu_unrecommand_this_song);
+                                    item.setChecked(true);
+                                } else {
+                                    unrecommandeSong(MusicPlayer.getInstance().getCurrentPlayingSong());
+                                    item.setTitle(R.string.popmenu_recommand_this_song);
+                                    item.setChecked(false);
+                                }
+                                break;
 
+                            case R.id.add_this_song:
+                                break;
 
-                                    break;
-
-                                case R.id.add_this_song:
-                                    break;
-
-                            }
-
-
-                            return true;
                         }
-                    });
-                }
+
+
+                        return true;
+                    }
+                });
+
                 popup.show(); //showing popup menu
             }
 
@@ -210,7 +214,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void unrecommandeSong(Song song){
+    private void unrecommandeSong(Song song) {
         song.setRecommanded(false);
         MockUpContent.getLocalUser().deleteRecommandedSong(song);
 
@@ -221,5 +225,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         MockUpContent.getLocalUser().addRecommandedSong(song);
     }
 
+  /*  @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() <= 1) {
+            super.onBackPressed();
+        } else {
+            getFragmentManager().popBackStack();
+        }
 
+    }*/
 }

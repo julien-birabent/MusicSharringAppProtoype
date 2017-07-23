@@ -19,9 +19,8 @@
 
     <EditText
         android:id="@+id/add_playlist_edittext"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="22dp"
         android:ems="10"
         android:inputType="textPersonName"
@@ -30,27 +29,30 @@
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:id="@+id/add_playlist_cancel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/add_playlist_edittext"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="39dp"
-        android:layout_marginLeft="20dp"
-        android:background="@color/_yellow"
-        android:text="Cancel"
-        />
 
     <Button
         android:id="@+id/add_playlist_confirm_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confirm"
-        android:layout_alignBaseline="@+id/add_playlist_cancel_btn"
-        android:background="@color/_yellow"
-        android:layout_marginRight="20dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="20dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_below="@id/add_playlist_edittext"
         android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/add_playlist_cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_playlist_edittext"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@id/add_playlist_confirm_btn"
+        android:layout_marginLeft="20dp"
+        android:text="Cancel"
+        />
+
 
 
 </RelativeLayout>

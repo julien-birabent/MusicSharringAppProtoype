@@ -1,6 +1,7 @@
 package julienbirabent.musicsharringappprotoype.fragments;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.Observable;
 import java.util.Observer;
@@ -119,9 +121,15 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
                     public void onClick(View v) {
 
                         EditText response = (EditText)dialog.findViewById(R.id.add_playlist_edittext);
-                        Playlist playlist = new Playlist(response.getText().toString(), new Song[0]);
-                        MockUpContent.getLocalUser().addPlaylist(playlist);
-                        dialog.dismiss();
+
+                        if(response.getText().length() != 0){
+                            Playlist playlist = new Playlist(response.getText().toString(), new Song[0]);
+                            MockUpContent.getLocalUser().addPlaylist(playlist);
+                            dialog.dismiss();
+                        }else{
+                            Toast.makeText(context, "The field can't be empty.", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 });
 
@@ -135,6 +143,7 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
 
                 dialog.show();
 
+
                 break;
 
             case R.id.share_a_song :
@@ -142,6 +151,12 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
         }
 
         return true;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+
     }
 
     @Override

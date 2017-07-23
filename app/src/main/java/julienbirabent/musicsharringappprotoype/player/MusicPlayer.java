@@ -71,10 +71,10 @@ public class MusicPlayer implements View.OnClickListener {
 
             if(!songQueue.isEmpty()){
                 if (!isPlaying) {
-                    pauseOrPlayButton.setImageResource(R.drawable.ic_play_arrow);
+                    pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
                     isPlaying = true;
                 } else {
-                    pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
+                    pauseOrPlayButton.setImageResource(R.drawable.ic_play_arrow);
                     isPlaying = false;
                 }
             }
@@ -95,11 +95,15 @@ public class MusicPlayer implements View.OnClickListener {
         if(songQueue.isEmpty()){
             displaySongInfos(song);
             songQueue.add(song);
+            pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
+            isPlaying = true;
         }else{
             if(!song.equals(songQueue.get(queueIndex))){
                 displaySongInfos(song);
                 songQueue.add(song);
                 queueIndex++;
+                pauseOrPlayButton.setImageResource(R.drawable.ic_pause);
+                isPlaying = true;
             }
         }
     }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Observable;
 
+import julienbirabent.musicsharringappprotoype.R;
+
 /**
  * Created by Julien on 2017-07-18.
  */
@@ -13,7 +15,7 @@ public class Playlist extends Observable implements Serializable {
 
     private Song[] songs;
     private String name;
-    private int idVignette;
+    private int idVignette =-1;
     private int nbOfSongs;
     private boolean generated;
 
@@ -47,6 +49,10 @@ public class Playlist extends Observable implements Serializable {
     }
 
     public int getIdVignette() {
+        if(idVignette==-1){
+            idVignette = R.drawable.default_album_vignette;
+        }
+
         return idVignette;
     }
 
@@ -109,6 +115,15 @@ public class Playlist extends Observable implements Serializable {
         setChanged();
         notifyObservers(this);
 
+    }
+
+    public void addSongCollection(Song[] songsToAdd){
+        ArrayList<Song> songList = new ArrayList<Song>(Arrays.asList(songs));
+        songList.addAll(Arrays.asList(songsToAdd));
+        songs = new Song[songList.size()];
+        songs = (Song[]) songList.toArray(songs);
+        setChanged();
+        notifyObservers(this);
     }
 
     public void removeSong(Song song){

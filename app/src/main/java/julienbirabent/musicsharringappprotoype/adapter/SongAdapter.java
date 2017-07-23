@@ -92,6 +92,8 @@ public class SongAdapter extends ArrayAdapter<Song> {
                 if(song.isListened()){
                     holder.listenedIndicator.setVisibility(View.VISIBLE);
                 }
+            }else{
+                holder.listenedIndicator.setVisibility(View.GONE);
             }
         }
 

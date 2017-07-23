@@ -19,12 +19,22 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp" />
 
+    <ImageView
+        android:id="@+id/listened_indicator"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:visibility="visible"
+        app:srcCompat="@drawable/ic_point"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="5dp"
+        android:layout_toEndOf="@+id/song_position_in_list" />
+
     <TextView
         android:id="@+id/song_basic_informations"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Basic informations about the song"
-        android:layout_marginLeft="35dp"
+        android:layout_marginLeft="50dp"
         android:textColor="@color/_black"
         android:textSize="16sp"
         android:layout_alignTop="@+id/song_position_in_list"
@@ -53,16 +63,7 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true" />
 
-    <ImageView
-        android:id="@+id/listened_indicator"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_alignTop="@+id/playlist_content_more_options"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp"
-        android:layout_toStartOf="@+id/playlist_content_more_options"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_listened" />
+
 
 
 </RelativeLayout>

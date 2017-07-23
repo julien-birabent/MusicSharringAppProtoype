@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -99,6 +100,8 @@ public class SongActionManager implements View.OnClickListener, AdapterView.OnIt
             Song songSelected = (Song) adapterView.getAdapter().getItem(i);
             MusicPlayer.getInstance().nextSong(songSelected);
             songSelected.setListened(true);
+            ImageView indicator = (ImageView) view.findViewById(R.id.listened_indicator);
+            indicator.setVisibility(View.GONE);
         }
     }
 

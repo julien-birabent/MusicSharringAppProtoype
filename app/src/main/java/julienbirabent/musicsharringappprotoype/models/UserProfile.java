@@ -16,6 +16,7 @@ public class UserProfile extends Observable{
 
     private Playlist[] playlists;
     private Song[] recommandedSongs;
+    private MusicType musicTypePreferences;
 
 
     public UserProfile(String name, int followersCount) {

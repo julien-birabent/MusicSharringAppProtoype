@@ -50,14 +50,12 @@ public class AddToPlaylistFragment extends Fragment {
         super.onCreate(savedInstanceState);
         playlistsSelected = new ArrayList<Playlist>();
         setHasOptionsMenu(true);
-
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
-
     }
 
     @Nullable
@@ -151,10 +149,6 @@ public class AddToPlaylistFragment extends Fragment {
             playlistListView.setAdapter(adapter);
             playlistListView.setOnItemClickListener(new PlaylistActionManager(context, playlistsSelected));
         }
-
-
-
-
     }
 
     @Override

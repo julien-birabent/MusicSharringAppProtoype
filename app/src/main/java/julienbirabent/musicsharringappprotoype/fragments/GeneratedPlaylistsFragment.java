@@ -75,7 +75,7 @@ public class GeneratedPlaylistsFragment extends Fragment {
     private void initPlaylists(){
         playlists = (ListView) this.getActivity().findViewById(R.id.listView_generated_playlists);
         playlists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
-        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getGeneratedPlaylistsFromPreferences());
+        PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getLocalUser().getGeneratedPlaylistsFromPreferences());
         playlists.setAdapter(adapter);
     }
 

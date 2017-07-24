@@ -77,7 +77,7 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
 
 
         playlists.setOnItemClickListener((AdapterView.OnItemClickListener) context);
-        PlaylistAdapter adapter = new PlaylistAdapter(context, R.layout.playlist_row, MockUpContent.getLocalUser().getPlaylists());
+        PlaylistAdapter adapter = new PlaylistAdapter(context, R.layout.playlist_row, MockUpContent.getInstance().getLocalUser().getPlaylists());
         playlists.setAdapter(adapter);
     }
 
@@ -124,7 +124,7 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
 
                         if(response.getText().length() != 0){
                             Playlist playlist = new Playlist(response.getText().toString(), new Song[0]);
-                            MockUpContent.getLocalUser().addPlaylist(playlist);
+                            MockUpContent.getInstance().getLocalUser().addPlaylist(playlist);
                             dialog.dismiss();
                         }else{
                             Toast.makeText(context, "The field can't be empty.", Toast.LENGTH_SHORT).show();

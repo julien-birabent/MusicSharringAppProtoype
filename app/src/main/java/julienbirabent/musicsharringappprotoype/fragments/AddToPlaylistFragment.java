@@ -60,7 +60,7 @@ public class AddToPlaylistFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable final ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_add_to_playlist, container, false);
         playlistListView = (ListView) rootView.findViewById(R.id.add_to_playlist_listView);
@@ -69,11 +69,14 @@ public class AddToPlaylistFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-             if(single){
-                 showSingleAddDialog();
-             }else{
-                 showMultipleAddDialog();
-             }
+                if(!playlistsSelected.isEmpty()){
+                    if(single){
+                        showSingleAddDialog();
+                    }else{
+                        showMultipleAddDialog();
+                    }
+                }else Toast.makeText(context, "The selection is empty.", Toast.LENGTH_SHORT).show();
+
             }
         });
         return rootView;
@@ -145,7 +148,7 @@ public class AddToPlaylistFragment extends Fragment {
         }else  playlisttoAdd = (Playlist) args.getSerializable("playlist");
 
         if(playlisttoAdd != null || songToAdd != null){
-            AddToPlaylistAdapter adapter = new AddToPlaylistAdapter(context, R.layout.add_to_playlist_row, MockUpContent.getLocalUser().getPlaylists());
+            AddToPlaylistAdapter adapter = new AddToPlaylistAdapter(context, R.layout.add_to_playlist_row, MockUpContent.getInstance().getLocalUser().getPlaylists());
             playlistListView.setAdapter(adapter);
             playlistListView.setOnItemClickListener(new PlaylistActionManager(context, playlistsSelected));
         }

@@ -2,4 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/music_type_preferences_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:text="Select the types of music you want to hear"
+        android:textAlignment="center"
+        android:textColor="@color/_black"
+        android:visibility="visible" />
+
+    <ListView
+        android:id="@+id/music_type_preferences_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/music_type_preferences_header"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:divider="@color/_light_purple"
+        android:dividerHeight="1dp" />
 </RelativeLayout>

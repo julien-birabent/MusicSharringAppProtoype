@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 case R.id.custom_playlist:
                     toolbar.setTitle(R.string.title_custom_playlist);
                     CustomPlaylistsFragment customPlaylistsFragment = new CustomPlaylistsFragment();
-                    MockUpContent.getLocalUser().addObserver(customPlaylistsFragment);
+                    MockUpContent.getInstance().getLocalUser().addObserver(customPlaylistsFragment);
                     fragmentTransaction.replace(R.id.content, customPlaylistsFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     toolbar.setTitle(R.string.title_profile);
 
                     MyProfileFragment myProfileFragment = new MyProfileFragment();
-                    MockUpContent.getLocalUser().addObserver(myProfileFragment);
+                    MockUpContent.getInstance().getLocalUser().addObserver(myProfileFragment);
                     fragmentTransaction.replace(R.id.content, myProfileFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
@@ -221,13 +221,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private void unrecommandeSong(Song song) {
         song.setRecommanded(false);
-        MockUpContent.getLocalUser().deleteRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().deleteRecommandedSong(song);
 
     }
 
     private void recommandASong(Song song) {
         song.setRecommanded(true);
-        MockUpContent.getLocalUser().addRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().addRecommandedSong(song);
     }
 
 }

@@ -44,6 +44,7 @@ public class MockUpContent {
         localUser = new UserProfile("Julien Birabent", 5);
         localUser.setPlaylists(customPlaylists);
         localUser.setRecommandedSongs(recommandedSongs);
+        localUser.setMusicTypePreferences(musicTypePreferences);
     }
 
     private void initMusicTypePreference() {
@@ -55,22 +56,6 @@ public class MockUpContent {
                 new MusicType(new Playlist(songs, "Gospel", R.drawable.ic_gospel_music, true), "Gospel"),
                 new MusicType(new Playlist(songs, "The 60's", R.drawable.ic_60s, true), "The 60's"),
         };
-    }
-
-
-    public Playlist[] getGeneratedPlaylistsFromPreferences() {
-
-        ArrayList<MusicType> musicTypes = new ArrayList<MusicType>(Arrays.asList(musicTypePreferences));
-
-        ArrayList<Playlist> playlists = new ArrayList<>();
-
-        for(MusicType musicType : musicTypes){
-            playlists.add(musicType.getPlaylistAssociated());
-        }
-
-        Playlist[] playlistsArray = new Playlist[playlists.size()];
-        return playlists.toArray(playlistsArray);
-
     }
 
     private void initCustomPlaylists() {
@@ -113,7 +98,7 @@ public class MockUpContent {
         return customPlaylists;
     }
 
-    public static UserProfile getLocalUser() {
+    public  UserProfile getLocalUser() {
         return localUser;
     }
 

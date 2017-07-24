@@ -123,13 +123,13 @@ public class SongActionManager implements View.OnClickListener, AdapterView.OnIt
 
     private void unrecommandeSong(){
         song.setRecommanded(false);
-        MockUpContent.getLocalUser().deleteRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().deleteRecommandedSong(song);
 
     }
 
     private void recommandASong() {
         song.setRecommanded(true);
-        MockUpContent.getLocalUser().addRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().addRecommandedSong(song);
     }
 
     private void showSongDetails() {

@@ -124,12 +124,12 @@ public class SongDetailPageFragment extends Fragment {
 
     private void unrecommandeSong(){
         song.setRecommanded(false);
-        MockUpContent.getLocalUser().deleteRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().deleteRecommandedSong(song);
 
     }
 
     private void recommandASong() {
         song.setRecommanded(true);
-        MockUpContent.getLocalUser().addRecommandedSong(song);
+        MockUpContent.getInstance().getLocalUser().addRecommandedSong(song);
     }
 }

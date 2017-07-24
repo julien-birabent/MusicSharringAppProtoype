@@ -70,11 +70,11 @@ public class MyProfileFragment extends Fragment implements Observer {
 
         myPlaylists = (ListView) this.getActivity().findViewById(R.id.myprofile_playlists);
         myPlaylists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
-        PlaylistAdapter adapter = new PlaylistAdapter(context, R.layout.playlist_row, MockUpContent.getLocalUser().getPlaylists());
+        PlaylistAdapter adapter = new PlaylistAdapter(context, R.layout.playlist_row, MockUpContent.getInstance().getLocalUser().getPlaylists());
         myPlaylists.setAdapter(adapter);
 
         myRecommandedSongs = (ListView) this.getActivity().findViewById(R.id.myprofile_recommanded_playlists);
-        SongAdapter songAdapter = new SongAdapter(context, R.layout.playlist_content_row, MockUpContent.getLocalUser().getRecommandedSongs());
+        SongAdapter songAdapter = new SongAdapter(context, R.layout.playlist_content_row, MockUpContent.getInstance().getLocalUser().getRecommandedSongs());
         myRecommandedSongs.setAdapter(songAdapter);
         myRecommandedSongs.setOnItemClickListener(new SongActionManager(this.getActivity()));
 

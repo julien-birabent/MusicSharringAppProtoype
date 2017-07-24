@@ -16,7 +16,7 @@ public class UserProfile extends Observable{
 
     private Playlist[] playlists;
     private Song[] recommandedSongs;
-    private MusicType musicTypePreferences;
+    private MusicType[] musicTypePreferences;
 
 
     public UserProfile(String name, int followersCount) {
@@ -94,4 +94,28 @@ public class UserProfile extends Observable{
         setChanged();
         notifyObservers(recommandedSongs);
     }
+
+    public MusicType[] getMusicTypePreferences() {
+        return musicTypePreferences;
+    }
+
+    public void setMusicTypePreferences(MusicType[] musicTypePreferences) {
+        this.musicTypePreferences = musicTypePreferences;
+    }
+
+    public Playlist[] getGeneratedPlaylistsFromPreferences() {
+
+        ArrayList<MusicType> musicTypes = new ArrayList<MusicType>(Arrays.asList(musicTypePreferences));
+
+        ArrayList<Playlist> playlists = new ArrayList<>();
+
+        for(MusicType musicType : musicTypes){
+            playlists.add(musicType.getPlaylistAssociated());
+        }
+
+        Playlist[] playlistsArray = new Playlist[playlists.size()];
+        return playlists.toArray(playlistsArray);
+
+    }
+
 }

@@ -230,13 +230,4 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         MockUpContent.getLocalUser().addRecommandedSong(song);
     }
 
-  /*  @Override
-    public void onBackPressed() {
-        if (getFragmentManager().getBackStackEntryCount() <= 1) {
-            super.onBackPressed();
-        } else {
-            getFragmentManager().popBackStack();
-        }
-
-    }*/
 }

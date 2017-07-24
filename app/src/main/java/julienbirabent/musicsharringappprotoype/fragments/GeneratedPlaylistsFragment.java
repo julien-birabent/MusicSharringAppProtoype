@@ -1,12 +1,15 @@
 package julienbirabent.musicsharringappprotoype.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -74,5 +77,22 @@ public class GeneratedPlaylistsFragment extends Fragment {
         playlists.setOnItemClickListener((AdapterView.OnItemClickListener) getActivity());
         PlaylistAdapter adapter = new PlaylistAdapter(this.getActivity(), R.layout.playlist_row, MockUpContent.getInstance().getGeneratedPlaylistsFromPreferences());
         playlists.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.select_music_types:
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                MusicTypePreferencesFragment musicTypePreferencesFragment = new MusicTypePreferencesFragment();
+
+                fragmentTransaction.replace(R.id.content, musicTypePreferencesFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

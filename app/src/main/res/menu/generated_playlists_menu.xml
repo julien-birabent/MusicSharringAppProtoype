@@ -10,6 +10,7 @@
         app:showAsAction="always" />
     <item
 
+        android:id="@+id/select_music_types"
         android:icon="@drawable/ic_gear"
         android:title="Settings"
         app:showAsAction="always" />

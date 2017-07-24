@@ -16,7 +16,6 @@ public class Playlist extends Observable implements Serializable {
     private Song[] songs;
     private String name;
     private int idVignette =-1;
-    private int nbOfSongs;
     private boolean generated;
 
     public Playlist(String name, Song[] songs) {
@@ -24,11 +23,10 @@ public class Playlist extends Observable implements Serializable {
         this.songs = songs;
     }
 
-    public Playlist(Song[]  songs, String name, int idVignette, int nbOfSongs, boolean generated) {
+    public Playlist(Song[]  songs, String name, int idVignette, boolean generated) {
         this.songs = songs;
         this.name = name;
         this.idVignette = idVignette;
-        this.nbOfSongs = nbOfSongs;
         this.generated = generated;
     }
 
@@ -69,9 +67,6 @@ public class Playlist extends Observable implements Serializable {
 
     }
 
-    public void setNbOfSongs(int nbOfSongs) {
-        this.nbOfSongs = nbOfSongs;
-    }
 
     public boolean isGenerated() {
         return generated;

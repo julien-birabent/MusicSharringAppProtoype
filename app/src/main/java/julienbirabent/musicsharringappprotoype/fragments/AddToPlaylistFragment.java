@@ -36,9 +36,11 @@ public class AddToPlaylistFragment extends Fragment {
     private View rootView;
     private ListView playlistListView;
     private Context context;
-    private Playlist contentToAdd;
+    private Playlist playlisttoAdd;
+    private Song songToAdd;
     private ArrayList<Playlist> playlistsSelected;
     private Button confirmBtn;
+    private boolean single = false;
 
     public AddToPlaylistFragment() {
     }
@@ -69,35 +71,68 @@ public class AddToPlaylistFragment extends Fragment {
             @Override
             public void onClick(View view) {
 
-                String selectedPlaylistFormatted = "\n";
-
-                for (Playlist playlist : playlistsSelected) {
-                    selectedPlaylistFormatted += ". "+playlist.getName() + "\n";
-                }
-
-                new AlertDialog.Builder(context)
-                        .setTitle("Confirm the selection")
-                        .setMessage("Do you really want to add the song(s) to the selected playlist(s)?\n" + selectedPlaylistFormatted)
-                        .setIcon(R.drawable.ic_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
-                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                                for (Playlist playlist : playlistsSelected) {
-                                    playlist.addSongCollection(contentToAdd.getSongs());
-                                }
-                                FragmentManager fragmentManager = getFragmentManager();
-                                fragmentManager.popBackStack();
-
-                                Toast.makeText(context, "Success !", Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null).show();
-
-
+             if(single){
+                 showSingleAddDialog();
+             }else{
+                 showMultipleAddDialog();
+             }
             }
         });
         return rootView;
+    }
+
+    private void showSingleAddDialog(){
+        String selectedPlaylistFormatted = "\n";
+
+        for (Playlist playlist : playlistsSelected) {
+            selectedPlaylistFormatted += ". "+playlist.getName() + "\n";
+        }
+
+        new AlertDialog.Builder(context)
+                .setTitle("Confirm the selection")
+                .setMessage("Do you really want to add the song(s) to the selected playlist(s)?\n" + selectedPlaylistFormatted)
+                .setIcon(R.drawable.ic_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        for (Playlist playlist : playlistsSelected) {
+                            playlist.addSong(songToAdd);
+                        }
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.popBackStack();
+
+                        Toast.makeText(context, "Success !", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
+    }
+
+    private void showMultipleAddDialog(){
+        String selectedPlaylistFormatted = "\n";
+
+        for (Playlist playlist : playlistsSelected) {
+            selectedPlaylistFormatted += ". "+playlist.getName() + "\n";
+        }
+
+        new AlertDialog.Builder(context)
+                .setTitle("Confirm the selection")
+                .setMessage("Do you really want to add the song(s) to the selected playlist(s)?\n" + selectedPlaylistFormatted)
+                .setIcon(R.drawable.ic_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        for (Playlist playlist : playlistsSelected) {
+                            playlist.addSongCollection(playlisttoAdd.getSongs());
+                        }
+                        FragmentManager fragmentManager = getFragmentManager();
+                        fragmentManager.popBackStack();
+
+                        Toast.makeText(context, "Success !", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, null).show();
     }
 
     @Override
@@ -105,11 +140,20 @@ public class AddToPlaylistFragment extends Fragment {
         super.onResume();
 
         Bundle args = getArguments();
-        contentToAdd = (Playlist) args.getSerializable("playlist");
+        single = args.getBoolean("single");
 
-        AddToPlaylistAdapter adapter = new AddToPlaylistAdapter(context, R.layout.add_to_playlist_row, MockUpContent.getLocalUser().getPlaylists());
-        playlistListView.setAdapter(adapter);
-        playlistListView.setOnItemClickListener(new PlaylistActionManager(context, playlistsSelected));
+        if(single){
+            songToAdd = (Song) args.getSerializable("song");
+        }else  playlisttoAdd = (Playlist) args.getSerializable("playlist");
+
+        if(playlisttoAdd != null || songToAdd != null){
+            AddToPlaylistAdapter adapter = new AddToPlaylistAdapter(context, R.layout.add_to_playlist_row, MockUpContent.getLocalUser().getPlaylists());
+            playlistListView.setAdapter(adapter);
+            playlistListView.setOnItemClickListener(new PlaylistActionManager(context, playlistsSelected));
+        }
+
+
+
 
     }
 
@@ -122,7 +166,8 @@ public class AddToPlaylistFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         FragmentUtils.activateNaviguationBack(this, true);
-        FragmentUtils.changeActionBarTittle(this, "Add song(s) to " + contentToAdd.getName());
+        FragmentUtils.changeActionBarTittle(this,"Adding song(s)");
+
     }
 
     @Override

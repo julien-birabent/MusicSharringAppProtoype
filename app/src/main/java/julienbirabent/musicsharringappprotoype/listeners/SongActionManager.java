@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.fragments.AddToPlaylistFragment;
 import julienbirabent.musicsharringappprotoype.fragments.SongDetailPageFragment;
 import julienbirabent.musicsharringappprotoype.models.Song;
 import julienbirabent.musicsharringappprotoype.player.MusicPlayer;
@@ -80,6 +81,21 @@ public class SongActionManager implements View.OnClickListener, AdapterView.OnIt
                             break;
 
                         case R.id.add_this_song:
+
+                            Activity activity = (Activity) context;
+                            FragmentManager fragmentManager = activity.getFragmentManager();
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+                           /* Transaction de remplacement de fragment */
+                            AddToPlaylistFragment addToPlaylistFragment = new AddToPlaylistFragment();
+
+                            Bundle args = new Bundle();
+                            args.putSerializable("song", song);
+                            args.putBoolean("single",true);
+                            addToPlaylistFragment.setArguments(args);
+                            fragmentTransaction.replace(R.id.content, addToPlaylistFragment);
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
                             break;
                         case R.id.delete_song:
                             break;

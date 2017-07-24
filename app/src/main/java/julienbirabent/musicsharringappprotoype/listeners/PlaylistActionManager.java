@@ -71,6 +71,7 @@ public class PlaylistActionManager implements View.OnClickListener , AdapterView
 
                         Bundle args = new Bundle();
                         args.putSerializable("playlist", playlist);
+                        args.putBoolean("single",false);
                         addToPlaylistFragment.setArguments(args);
                         fragmentTransaction.replace(R.id.content, addToPlaylistFragment);
                         fragmentTransaction.addToBackStack(null);

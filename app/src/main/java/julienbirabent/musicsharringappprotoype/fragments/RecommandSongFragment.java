@@ -11,6 +11,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.SearchView;
 
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.R;
@@ -23,6 +25,8 @@ public class RecommandSongFragment extends Fragment {
 
     private Context context;
     private View rootView;
+    private SearchView searchView;
+
 
     public RecommandSongFragment() {
     }
@@ -30,6 +34,9 @@ public class RecommandSongFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+
     }
 
     @Override
@@ -49,6 +56,8 @@ public class RecommandSongFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_recommand_song, container, false);
+        searchView = rootView.findViewById(R.id.recommand_song_search);
+
         return  rootView;
 
     }
@@ -58,6 +67,7 @@ public class RecommandSongFragment extends Fragment {
 
         FragmentUtils.activateNaviguationBack(this, true);
         FragmentUtils.changeActionBarTittle(this,"Recommend a song");
+
     }
 
     @Override

@@ -157,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 popup.getMenuInflater()
                         .inflate(R.menu.song_popup_menu, popup.getMenu());
 
+                popup.getMenu().removeItem(R.id.delete_song);
+
                 MenuItem recommandItem = popup.getMenu().findItem(R.id.recommande_song);
 
                 if (MusicPlayer.getInstance().getCurrentPlayingSong().isRecommanded()) {

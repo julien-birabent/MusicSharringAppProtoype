@@ -81,10 +81,13 @@ public class GeneratedPlaylistsFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         switch (item.getItemId()) {
             case R.id.select_music_types:
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
                 MusicTypePreferencesFragment musicTypePreferencesFragment = new MusicTypePreferencesFragment();
 
                 fragmentTransaction.replace(R.id.content, musicTypePreferencesFragment);
@@ -92,6 +95,15 @@ public class GeneratedPlaylistsFragment extends Fragment {
                 fragmentTransaction.commit();
 
                 return true;
+
+            case R.id.share_a_song :
+
+                RecommandSongFragment recommandSongFragment = new RecommandSongFragment();
+                fragmentTransaction.replace(R.id.content, recommandSongFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                return  true;
         }
         return super.onOptionsItemSelected(item);
     }

@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -93,6 +94,7 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
         super.onResume();
         FragmentUtils.changeActionBarTittle(this,getString(R.string.title_custom_playlist));
         initPlaylists(context);
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
     }
 
     @Override
@@ -112,6 +114,7 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.add_playlists_dialog);
                 dialog.setTitle("Add a playlist");
+                dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 
 
                 Button confirmBtn = (Button) dialog.findViewById(R.id.add_playlist_confirm_btn);

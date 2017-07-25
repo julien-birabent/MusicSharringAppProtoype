@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,6 +58,13 @@ public class RecommandSongFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.fragment_recommand_song, container, false);
         searchView = rootView.findViewById(R.id.recommand_song_search);
+
+        searchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Testing", " click du search button");
+            }
+        });
 
         return  rootView;
 

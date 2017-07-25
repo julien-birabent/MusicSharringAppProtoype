@@ -1,48 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:id="@+id/recommand_song_parent_layout"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:windowSoftInputMode="adjustNothing"
-    >
+    android:orientation="vertical"
+    android:windowSoftInputMode="adjustNothing">
 
-    <SearchView
-        android:id="@+id/recommand_song_search"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/AppTheme"
-        android:backgroundTintMode="screen"
-        android:iconifiedByDefault="false"
-        android:inputType="text"
-        android:layout_marginBottom="10dp"
-        android:queryHint="Song, album or artist">
-
-        <requestFocus />
-    </SearchView>
-
-    <LinearLayout
-        android:background="@color/_yellow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:text="Songs founded"
-
-            android:textSize="16sp"
-            android:textColor="@color/_black"
-            android:layout_marginStart="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/recommand_song_list"
-        android:layout_marginTop="5dp"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </ListView>
+        <SearchView
+            android:id="@+id/recommand_song_search"
+            style="@style/AppTheme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:backgroundTintMode="screen"
+            android:layout_alignParentTop="true"
+            android:iconifiedByDefault="false"
+            android:inputType="text"
+            android:queryHint="Song, album or artist">
+
+            <requestFocus />
+        </SearchView>
+
+        <LinearLayout
+            android:id="@+id/recommand_song_list_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/recommand_song_search"
+            android:background="@color/_yellow">
+
+            <TextView
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:text="Songs founded"
+                android:textColor="@color/_black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/recommand_song_list"
+            android:layout_below="@+id/recommand_song_list_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+        </ListView>
+
+
+    </RelativeLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/recommand_song_confirm_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done"
+        app:backgroundTint="@color/_yellow"
+        app:fabSize="normal"
+        android:layout_margin="10dp"
+        android:layout_gravity="bottom|end"/>
 
 
 
-</LinearLayout>
+</FrameLayout>

@@ -22,6 +22,9 @@ public class MockUpContent {
     private static Song[] recommandedSongs = new Song[0];
     private static UserProfile localUser;
     private static MusicType[] musicTypePreferences;
+    private static MusicType[] allMusicTypes;
+
+    private static String[] musicTypeMockupContent = {"Heavy Metal", "Rock n' Roll", "Hard Rock", "Alternative", "Classical", "Punk Rock", "Pop", "Rap", "Blues", "Dirty Rap", "Thrash Metal", "Electronic", "Grunge", "Progressive Rock", "R&B", "Pop Rock", "Psychedelic Rock", "Hip Hop", "Soul", "Alternative Metal", "Reggae", "Nu Metal", "Funk", "Folk", "Disco", "Progressive Metal", "Blues Rock", "Alternative Rock", "Death Metal", "Melodic Death Metal", "Groove Metal", "Rap Rock", "Emo", "Power Metal", "Trance ", "Black Metal", "Metalcore", "Metal", "New Wave", "Pop Punk", "Indie Rock", "Piano Rock", "Dubstep", "Glam Rock", "House", "Swing Music", "Classic Country", "Art Rock", "Punk", "Opera", "Dance", "Melodic Metal", "Trap", "Rap Metal", "Folk Metal", "K Pop", "Chiptune", "Electronic Rock", "Traditional Heavy Metal", "Industrial Rock", "Experimental Rock", "Synthwave", "Neo-classical Metal", "Synthpop", "Darkwave", "Industrial Metal", "Soundtrack", "50s Doo-wop", "West Coast Hip Hop", "Classic R&B", "Drum and Bass", "Electronic Dance Music", "Symphonic Metal", "Chillstep", "Christian", "Instrumental Hip Hop", "Video Game", "Folk rock", "Russian Folk", "Comedy Rock", "East Coast Hip Hop", "Techno", "J Pop", "Nightcore", "Ska", "Neoclassical Darkwave", "Country Pop", "Contemporary Country", "Electro Rock", "Electrorap", "Post-Hardcore", "Indie Pop", "Contemporary Christian", "Gangsta Rap", "Gothic Rock", "Rockabilly", "Alternative Hip Hop", "Stoner Rock", "Country Rock"};
 
 
     private MockUpContent() {
@@ -48,15 +51,28 @@ public class MockUpContent {
     }
 
     private void initMusicTypePreference() {
+
+        // Adding the content the fake user initially wants
         musicTypePreferences = new MusicType[]{
-                new MusicType(new Playlist(songs, "Jazz", R.drawable.ic_jazz_music, true), "Jazz"),
-                new MusicType(new Playlist(songs, "Metal", R.drawable.ic_metal_music, true), "Metal"),
-                new MusicType(new Playlist(songs, "Country", R.drawable.ic_country_music, true), "Country"),
-                new MusicType(new Playlist(songs, "Summer Mix", R.drawable.ic_sun, true), "Summer Mix"),
-                new MusicType(new Playlist(songs, "Gospel", R.drawable.ic_gospel_music, true), "Gospel"),
-                new MusicType(new Playlist(songs, "The 60's", R.drawable.ic_60s, true), "The 60's"),
+                new MusicType(new Playlist(songs, "Jazz", R.drawable.ic_jazz_music, true),"Jazz",true),
+                new MusicType(new Playlist(songs, "Metal", R.drawable.ic_metal_music, true), "Metal",true),
+                new MusicType(new Playlist(songs, "Country", R.drawable.ic_country_music, true), "Country",true),
+                new MusicType(new Playlist(songs, "Summer Mix", R.drawable.ic_sun, true), "Summer Mix",true),
+                new MusicType(new Playlist(songs, "Gospel", R.drawable.ic_gospel_music, true), "Gospel",true),
+                new MusicType(new Playlist(songs, "The 60's", R.drawable.ic_60s, true), "The 60's",true),
         };
+
+        ArrayList<MusicType> musicTypesExtra = new ArrayList<>(Arrays.asList(musicTypePreferences));
+
+
+        for(int i = 0 ; i <musicTypeMockupContent.length ; i++ ){
+            musicTypesExtra.add(new MusicType(new Playlist(songs, musicTypeMockupContent[i], R.drawable.default_album_vignette, true),musicTypeMockupContent[i],false));
+        }
+        allMusicTypes = new MusicType[musicTypesExtra.size()];
+        allMusicTypes = musicTypesExtra.toArray(allMusicTypes);
     }
+
+
 
     private void initCustomPlaylists() {
 
@@ -104,5 +120,13 @@ public class MockUpContent {
 
     public static void setLocalUser(UserProfile localUser) {
         MockUpContent.localUser = localUser;
+    }
+
+    public  MusicType[] getAllMusicTypes() {
+        return allMusicTypes;
+    }
+
+    public  void setAllMusicTypes(MusicType[] allMusicTypes) {
+        MockUpContent.allMusicTypes = allMusicTypes;
     }
 }

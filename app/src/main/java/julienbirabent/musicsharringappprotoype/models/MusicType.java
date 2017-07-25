@@ -8,6 +8,13 @@ public class MusicType {
 
     private Playlist playlistAssociated;
     private String name;
+    private boolean desired = false;
+
+    public MusicType(Playlist playlistAssociated, String name, boolean desired) {
+        this.playlistAssociated = playlistAssociated;
+        this.name = name;
+        this.desired = desired;
+    }
 
     public MusicType(Playlist playlistAssociated, String name) {
         this.playlistAssociated = playlistAssociated;
@@ -35,5 +42,13 @@ public class MusicType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public boolean isDesired() {
+        return desired;
+    }
+
+    public void setDesired(boolean desired) {
+        this.desired = desired;
     }
 }

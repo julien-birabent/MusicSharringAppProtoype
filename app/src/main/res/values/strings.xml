@@ -19,9 +19,9 @@
 
     <string name="comment_section">Comments section</string>
 
-    <string name="popmenu_recommand_this_song">Recommande this song</string>
+    <string name="popmenu_recommand_this_song">Recommand this song</string>
     <string name="popmenu_delete_song">Delete</string>
-    <string name="popmenu_unrecommand_this_song">Unrecommande this song</string>
+    <string name="popmenu_unrecommand_this_song">Unrecommand this song</string>
     <string name="title_music_type_preferences">Music type preferences</string>
     <string name="confirm_the_selection">Confirm selection</string>
 </resources>

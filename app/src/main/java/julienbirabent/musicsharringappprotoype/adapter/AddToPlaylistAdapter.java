@@ -62,7 +62,7 @@ public class AddToPlaylistAdapter extends ArrayAdapter {
         Playlist playlist = data[position];
         holder.name.setText(playlist.getName());
         holder.vignette.setImageResource(playlist.getIdVignette());
-        holder.nbSongs.setText(playlist.getNbOfSongs() + " songs.");
+        holder.nbSongs.setText(playlist.getNbOfSongs() + " songs");
 
         return row;
     }

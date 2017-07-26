@@ -96,11 +96,11 @@ public class MockUpContent {
 
         songs = new Song[]{
 
-                new Song("Gorrilaz", "Plastic Beach", "Broken", R.drawable.plastic_beach_1000_1000, userRecommandations),
-                new Song("Gorrilaz", "Plastic Beach", "Cloud of unknowing", R.drawable.plastic_beach_1000_1000, userRecommandations),
-                new Song("Gorrilaz", "Plastic Beach", "White flag", R.drawable.plastic_beach_1000_1000, userRecommandations),
-                new Song("Gorrilaz", "Plastic Beach", "Empire Ants", R.drawable.plastic_beach_1000_1000, userRecommandations),
-                new Song("Gorrilaz", "Plastic Beach", "Stylo", R.drawable.plastic_beach_1000_1000, userRecommandations),
+                new Song("Gorillaz", "Plastic Beach", "Broken", R.drawable.plastic_beach_1000_1000, userRecommandations),
+                new Song("Gorillaz", "Plastic Beach", "Cloud of Unknowing", R.drawable.plastic_beach_1000_1000, userRecommandations),
+                new Song("Gorillaz", "Plastic Beach", "White Flag", R.drawable.plastic_beach_1000_1000, userRecommandations),
+                new Song("Gorillaz", "Plastic Beach", "Empire Ants", R.drawable.plastic_beach_1000_1000, userRecommandations),
+                new Song("Gorillaz", "Plastic Beach", "Stylo", R.drawable.plastic_beach_1000_1000, userRecommandations),
                 // Test l affichage de la vignette d album par défaut
                 new Song("Muse", "Origin of Symmetry", "Bliss", userRecommandations),
         };

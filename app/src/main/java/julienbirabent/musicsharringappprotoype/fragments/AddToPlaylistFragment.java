@@ -75,7 +75,7 @@ public class AddToPlaylistFragment extends Fragment {
                     }else{
                         showMultipleAddDialog();
                     }
-                }else Toast.makeText(context, "The selection is empty.", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(context, "The selection is empty", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -103,7 +103,7 @@ public class AddToPlaylistFragment extends Fragment {
                         FragmentManager fragmentManager = getFragmentManager();
                         fragmentManager.popBackStack();
 
-                        Toast.makeText(context, "Success !", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .setNegativeButton(android.R.string.no, null).show();
@@ -113,7 +113,7 @@ public class AddToPlaylistFragment extends Fragment {
         String selectedPlaylistFormatted = "\n";
 
         for (Playlist playlist : playlistsSelected) {
-            selectedPlaylistFormatted += ". "+playlist.getName() + "\n";
+            selectedPlaylistFormatted += "• "+playlist.getName() + "\n";
         }
 
         new AlertDialog.Builder(context)

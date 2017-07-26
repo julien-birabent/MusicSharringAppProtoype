@@ -98,7 +98,7 @@ public class MusicTypePreferencesFragment extends Fragment implements AdapterVie
                                 FragmentManager fragmentManager = getFragmentManager();
                                 fragmentManager.popBackStack();
 
-                                Toast.makeText(context, "Success !", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Success!", Toast.LENGTH_SHORT).show();
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();

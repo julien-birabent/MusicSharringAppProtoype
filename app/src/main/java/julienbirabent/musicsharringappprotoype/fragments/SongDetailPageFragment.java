@@ -2,7 +2,7 @@ package julienbirabent.musicsharringappprotoype.fragments;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.ClipData;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,11 +12,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.MockUpContent;
 import julienbirabent.musicsharringappprotoype.R;
+import julienbirabent.musicsharringappprotoype.models.Comment;
 import julienbirabent.musicsharringappprotoype.models.Song;
 
 /**
@@ -26,6 +29,11 @@ import julienbirabent.musicsharringappprotoype.models.Song;
 public class SongDetailPageFragment extends Fragment {
 
     private Song song;
+    private ListView commentList;
+    private View rootView;
+    private Context context;
+    private ViewGroup container;
+    private LinearLayout commentsContainer;
 
     public SongDetailPageFragment() {
     }
@@ -39,21 +47,52 @@ public class SongDetailPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.song_detail_page_fragment, container, false);
+
+        rootView = inflater.inflate(R.layout.song_detail_page_fragment, container, false);
+        commentsContainer = rootView.findViewById(R.id.song_detail_page_comments_container);
+        this.container = container;
+
+
+
+        return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         FragmentUtils.activateNaviguationBack(this, true);
-
-        Bundle args = getArguments();
-         song = (Song) args.getSerializable("song");
-
         FragmentUtils.changeActionBarTittle(this, getString(R.string.title_song_page));
 
-        displaySongDetails(song);
+        Bundle args = getArguments();
+        song = (Song) args.getSerializable("song");
 
+        if (song != null) {
+            displaySongDetails(song);
+            appendComments();
+        }
+
+
+    }
+
+    private void appendComments() {
+
+        for(Comment comment : song.getComments()){
+            View commentView = new View(context);
+            commentView = LayoutInflater.from(context).inflate(R.layout.simple_title_body_row, container, false);
+            TextView title = (TextView) commentView.findViewById(R.id.title_row);
+            TextView body = (TextView) commentView.findViewById(R.id.body_row);
+
+            title.setText(comment.getCommentOwner().getName());
+            body.setText(comment.getBody());
+
+            commentsContainer.addView(commentView);
+        }
 
     }
 
@@ -76,6 +115,9 @@ public class SongDetailPageFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
+
+        commentsContainer.removeAllViews();
+
     }
 
     @Override
@@ -83,12 +125,12 @@ public class SongDetailPageFragment extends Fragment {
         menu.clear();
         inflater.inflate(R.menu.song_page_menu, menu);
 
-        MenuItem itemRecommand =  menu.findItem(R.id.recommande_song);
-        if(itemRecommand.getItemId() == R.id.recommande_song){
-            if(song.isRecommanded()){
+        MenuItem itemRecommand = menu.findItem(R.id.recommande_song);
+        if (itemRecommand.getItemId() == R.id.recommande_song) {
+            if (song.isRecommanded()) {
                 itemRecommand.setTitle(R.string.popmenu_unrecommand_this_song);
                 itemRecommand.setChecked(true);
-            }else{
+            } else {
                 itemRecommand.setTitle(R.string.popmenu_recommand_this_song);
                 itemRecommand.setChecked(false);
             }
@@ -105,12 +147,12 @@ public class SongDetailPageFragment extends Fragment {
                 FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.popBackStack();
                 return true;
-            case R.id.recommande_song :
-                if(!item.isChecked()){
+            case R.id.recommande_song:
+                if (!item.isChecked()) {
                     recommandASong();
                     item.setTitle(R.string.popmenu_unrecommand_this_song);
                     item.setChecked(true);
-                }else{
+                } else {
                     unrecommandeSong();
                     item.setTitle(R.string.popmenu_recommand_this_song);
                     item.setChecked(false);
@@ -122,7 +164,7 @@ public class SongDetailPageFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    private void unrecommandeSong(){
+    private void unrecommandeSong() {
         song.setRecommanded(false);
         MockUpContent.getInstance().getLocalUser().deleteRecommandedSong(song);
 

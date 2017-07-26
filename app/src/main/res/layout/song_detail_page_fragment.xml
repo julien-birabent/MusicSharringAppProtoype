@@ -104,7 +104,7 @@
             <RelativeLayout
                 android:id="@+id/song_page_label_comments_section"
                 android:background="@color/_yellow"
-                android:layout_below="@id/page_song_recommanded_by_label"
+                android:layout_below="@id/song_page_view_all_recommandations"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
@@ -120,14 +120,14 @@
 
             </RelativeLayout>
 
-            <ListView
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/song_page_label_comments_section"
-                android:id="@+id/song_page_comments_listView"
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/song_detail_page_comments_container"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/song_page_label_comments_section">
 
-            </ListView>
+            </LinearLayout>
 
         </RelativeLayout>
 

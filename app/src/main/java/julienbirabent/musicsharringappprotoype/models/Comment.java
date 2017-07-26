@@ -1,10 +1,12 @@
 package julienbirabent.musicsharringappprotoype.models;
 
+import java.io.Serializable;
+
 /**
  * Created by julbi on 2017-07-26.
  */
 
-public class Comment {
+public class Comment implements Serializable{
 
     private UserProfile commentOwner;
     private String body;

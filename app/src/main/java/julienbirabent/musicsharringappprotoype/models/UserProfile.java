@@ -1,5 +1,6 @@
 package julienbirabent.musicsharringappprotoype.models;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +10,7 @@ import java.util.Observable;
  * Created by julbi on 2017-07-21.
  */
 
-public class UserProfile extends Observable{
+public class UserProfile extends Observable implements Serializable{
 
     private String name;
     private int followersCount;

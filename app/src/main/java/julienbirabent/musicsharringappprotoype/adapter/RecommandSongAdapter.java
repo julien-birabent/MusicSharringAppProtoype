@@ -64,6 +64,9 @@ public class RecommandSongAdapter extends ArrayAdapter <Song>{
             holder.vignette.setImageResource(song.getAlbumVignetteId());
             holder.titleSong.setText(song.getName());
             holder.artistAlbum.setText(song.getAlbum() + " - " + song.getArtist());
+            if(!song.isRecommanded()){
+                holder.check.setChecked(false);
+            }else holder.check.setChecked(true);
 
         }
 

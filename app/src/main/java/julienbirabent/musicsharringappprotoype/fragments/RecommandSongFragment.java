@@ -1,12 +1,16 @@
 package julienbirabent.musicsharringappprotoype.fragments;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -83,18 +88,32 @@ public class RecommandSongFragment extends Fragment implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
 
-                for(Song song : currentSelection){
-                    song.setRecommanded(true);
+                if(!currentSelection.isEmpty()){
+
+                    new AlertDialog.Builder(context)
+                            .setTitle("Confirm the selection")
+                            .setMessage("Do you really want to add the selected song(s) to your recommanded songs list?\n")
+                            .setIcon(R.drawable.ic_alert)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    Song[] songSelectedArray = new Song[currentSelection.size()];
+                                    songSelectedArray = currentSelection.toArray(songSelectedArray);
+
+                                    MockUpContent.getInstance().getLocalUser().addRecommandedSongs(songSelectedArray);
+
+                                    FragmentManager fragmentManager = getFragmentManager();
+                                    fragmentManager.popBackStack();
+
+                                    Toast.makeText(context, "The selection has been added to your profile", Toast.LENGTH_SHORT).show();
+
+                                }
+                            })
+                            .setNegativeButton(android.R.string.no, null).show();
+
+                }else{
+                    Toast.makeText(context,"The selection is empty", Toast.LENGTH_SHORT).show();
                 }
-
-                Song[] songSelectedArray = new Song[currentSelection.size()];
-                songSelectedArray = currentSelection.toArray(songSelectedArray);
-
-                MockUpContent.getInstance().getLocalUser().addRecommandedSongs(songSelectedArray);
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStack();
-
-                Toast.makeText(context, "The selection has been added to your profile", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -176,9 +195,14 @@ public class RecommandSongFragment extends Fragment implements AdapterView.OnIte
                 checkBox.setChecked(!checkBox.isChecked());
 
                 if (checkBox.isChecked()) {
-                    currentSelection.add((Song) adapterView.getAdapter().getItem(i));
+                    currentSelection.add(songSelected);
+                    songSelected.setRecommanded(true);
+
                 }else{
+
+                    songSelected.setRecommanded(false);
                     currentSelection.remove(songSelected);
+
                 }
             }
         }

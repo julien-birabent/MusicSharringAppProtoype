@@ -8,10 +8,10 @@
     <item
         android:id="@+id/share_this_song"
         android:icon="?attr/actionModeShareDrawable"
-        android:title="Share this song"
+        android:title="Share song"
         app:showAsAction="always" />
     <item
         android:id="@+id/recommande_song"
         android:checkable="true"
-        android:title="Recommande this song" />
+        android:title="Recommend song" />
 </menu>

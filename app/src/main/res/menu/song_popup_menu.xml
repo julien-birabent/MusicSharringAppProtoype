@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/song_detail"
-        android:title="View the song details" />
+        android:title="View song details" />
     <item
         android:id="@+id/recommande_song"
         android:checkable="true"

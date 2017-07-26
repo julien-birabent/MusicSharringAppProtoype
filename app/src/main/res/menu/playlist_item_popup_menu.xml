@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/add_all_to_custom_playlist"
-        android:title="Add all the songs to..." />
+        android:title="Add all songs to..." />
     <item
         android:id="@+id/delete_playlist"
         android:title="Delete" />

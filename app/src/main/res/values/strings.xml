@@ -7,21 +7,21 @@
 
     <string name="title_profile">My Profile</string>
     <string name="title_custom_playlist">My Playlists</string>
-    <string name="title_generated_playlist">Generated Playlist</string>
+    <string name="title_generated_playlist">Generated Playlists</string>
     <string name="title_song_page">About this song</string>
 
     <string name="title_comments">Comments</string>
     <string name="button_see_the_comments">See the comments</string>
-    <string name="title_recommanded_by">Recommanded by</string>
+    <string name="title_recommanded_by">Recommended by</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="comment_section">Comments section</string>
 
-    <string name="popmenu_recommand_this_song">Recommend this song</string>
+    <string name="popmenu_recommand_this_song">Recommend song</string>
     <string name="popmenu_delete_song">Delete</string>
-    <string name="popmenu_unrecommand_this_song">Unrecommend this song</string>
+    <string name="popmenu_unrecommand_this_song">Unrecommend song</string>
     <string name="title_music_type_preferences">Music type preferences</string>
     <string name="confirm_the_selection">Confirm selection</string>
 </resources>

@@ -74,10 +74,10 @@ public class Song extends Observable implements Serializable  {
         String formatted;
 
         if(userRecommandations.size() == 0){
-            formatted = "Recommanded by no one at the moment. Be the first !";
+            formatted = "Recommended by no one at the moment. Be the first!";
         }else{
             int restOfRecommandation =  userRecommandations.size()-2;
-            formatted = "Recommanded by "+ userRecommandations.get(0) +", " + userRecommandations.get(1) + " and " + restOfRecommandation + " more people.";
+            formatted = "Recommended by "+ userRecommandations.get(0) +", " + userRecommandations.get(1) + " and " + restOfRecommandation + " more people";
         }
 
         return formatted;

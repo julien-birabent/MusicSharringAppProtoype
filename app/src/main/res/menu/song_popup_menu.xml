@@ -12,7 +12,7 @@
         android:title="@string/popmenu_recommand_this_song" />
     <item
         android:id="@+id/add_this_song"
-        android:title="add this song to..." />
+        android:title="Add this song to..." />
     <item
         android:id="@+id/delete_song"
         android:title="@string/popmenu_delete_song" />

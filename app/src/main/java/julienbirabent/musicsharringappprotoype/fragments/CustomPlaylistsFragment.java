@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -150,7 +152,15 @@ public class CustomPlaylistsFragment extends Fragment implements Observer {
                 break;
 
             case R.id.share_a_song :
-                break;
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RecommandSongFragment recommandSongFragment = new RecommandSongFragment();
+                fragmentTransaction.replace(R.id.content, recommandSongFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                return  true;
+
         }
 
         return true;

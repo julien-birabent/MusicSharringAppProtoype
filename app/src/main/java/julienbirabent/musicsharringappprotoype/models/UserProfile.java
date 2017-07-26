@@ -86,6 +86,19 @@ public class UserProfile extends Observable{
         notifyObservers(recommandedSongs);
     }
 
+    public void addRecommandedSongs(Song[] songs){
+        ArrayList<Song> songArrayList = new ArrayList<Song>(Arrays.asList(recommandedSongs));
+        ArrayList<Song> songToAdd = new ArrayList<Song>(Arrays.asList(songs));
+
+        songArrayList.addAll(songToAdd);
+
+        recommandedSongs = new Song[songArrayList.size()];
+        recommandedSongs = (Song[]) songArrayList.toArray(recommandedSongs);
+        setChanged();
+        notifyObservers(recommandedSongs);
+
+    }
+
     public void deleteRecommandedSong(Song song){
         ArrayList<Song> songArrayList = new ArrayList<Song>(Arrays.asList(recommandedSongs));
         songArrayList.remove(song);

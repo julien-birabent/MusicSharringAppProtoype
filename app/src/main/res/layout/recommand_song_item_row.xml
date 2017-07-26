@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants">
+
+    <ImageView
+        android:id="@+id/recommand_song_item_vignette"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:padding="5dp"
+        app:srcCompat="@drawable/default_album_vignette" />
+
+    <TextView
+        android:id="@+id/recommand_song_item_title"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/recommand_song_item_vignette"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:text="Basic informations about the song"
+        android:textColor="@color/_black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/recommand_song_item_album_artist"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recommand_song_item_title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@+id/recommand_song_item_vignette"
+        android:ellipsize="end"
+        android:text="Recommanded by..."
+        android:textSize="12sp" />
+
+    <CheckBox
+        android:id="@+id/recommand_song_item_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="5dp"
+        android:layout_marginEnd="14dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="false"
+        android:focusable="false"
+        app:srcCompat="@drawable/ic_more_options_row" />
+
+
+</RelativeLayout>

@@ -3,9 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/share_a_song"
         android:icon="?android:attr/actionModeShareDrawable"
         android:title="Item"
         app:showAsAction="always" />
-    <item android:title="Item" />
 
 </menu>

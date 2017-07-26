@@ -1,6 +1,8 @@
 package julienbirabent.musicsharringappprotoype.fragments;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -100,6 +103,26 @@ public class MyProfileFragment extends Fragment implements Observer {
             myRecommandedSongs.setAdapter(songAdapter);
         }
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+
+            case R.id.share_a_song :
+
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RecommandSongFragment recommandSongFragment = new RecommandSongFragment();
+                fragmentTransaction.replace(R.id.content, recommandSongFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
 

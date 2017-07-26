@@ -25,7 +25,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
-        android:hint="The playlist name"
+        android:hint="Ex.: Running"
         android:layout_below="@+id/textView2"
         android:layout_alignParentStart="true" />
 

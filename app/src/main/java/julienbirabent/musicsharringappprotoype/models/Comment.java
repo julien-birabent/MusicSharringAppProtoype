@@ -14,6 +14,10 @@ public class Comment {
         this.body = body;
     }
 
+    public Comment(UserProfile commentOwner) {
+        this.commentOwner = commentOwner;
+    }
+
     public UserProfile getCommentOwner() {
         return commentOwner;
     }

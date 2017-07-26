@@ -22,6 +22,7 @@ public class Song extends Observable implements Serializable  {
     private ArrayList<String> userRecommandations;
     private boolean listened = false;
     private boolean recommanded = false;
+    private ArrayList<Comment> comments = new ArrayList<>();
 
 
     public Song(String artist, String album, String name) {
@@ -44,6 +45,16 @@ public class Song extends Observable implements Serializable  {
         this.albumVignetteId = albumVignetteId;
         this.userRecommandations = userRecommandations;
     }
+
+    public Song(String artist, String album, String name,  int albumVignetteId, ArrayList<String> userRecommandations, ArrayList<Comment> comments) {
+        this.artist = artist;
+        this.album = album;
+        this.name = name;
+        this.albumVignetteId = albumVignetteId;
+        this.userRecommandations = userRecommandations;
+        this.comments = comments;
+    }
+
 
     public String getArtist() {
         return artist;
@@ -140,5 +151,13 @@ public class Song extends Observable implements Serializable  {
         this.recommanded = recommanded;
         setChanged();
         notifyObservers(this);
+    }
+
+    public ArrayList<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        this.comments = comments;
     }
 }

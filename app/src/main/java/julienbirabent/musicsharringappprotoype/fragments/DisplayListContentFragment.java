@@ -105,10 +105,18 @@ public class DisplayListContentFragment extends Fragment implements Observer{
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        FragmentManager fragmentManager = getFragmentManager();
         switch(item.getItemId()) {
             case android.R.id.home:
-                FragmentManager fragmentManager = getFragmentManager();
                 fragmentManager.popBackStack();
+                return true;
+
+            case R.id.share_a_song:
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                RecommandSongFragment recommandSongFragment = new RecommandSongFragment();
+                fragmentTransaction.replace(R.id.content, recommandSongFragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
                 return true;
         }
         return super.onOptionsItemSelected(item);

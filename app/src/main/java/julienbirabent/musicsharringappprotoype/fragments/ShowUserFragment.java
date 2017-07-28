@@ -109,7 +109,20 @@ public class ShowUserFragment extends Fragment {
 
                     userSelected = users.get(view.getId());
 
-                    Log.e("Lala", user.getName());
+                    Log.e("Lala", userSelected.getName());
+
+                    FragmentManager fragmentManager = getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    ProfileFragment profileFragment = new ProfileFragment();
+
+                    Bundle args = new Bundle();
+                    args.putSerializable("user", userSelected);
+                    profileFragment.setArguments(args);
+
+                    fragmentTransaction.replace(R.id.content, profileFragment);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+
                 }
             });
 

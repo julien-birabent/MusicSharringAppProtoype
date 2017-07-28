@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.Observable;
 
@@ -38,6 +41,8 @@ public class ProfileFragment extends Fragment {
 
     private ListView playlists;
     private ListView recommandedSongs;
+    private TextView userName;
+    private TextView followerCount;
     private Context context;
     private Button followBtn;
     private View rootView;
@@ -58,9 +63,10 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_layout_my_profile, container, false);
-
-        rootView.findViewById(R.id.myprofile_follow_action);
+        followBtn = rootView.findViewById(R.id.myprofile_follow_action);
         followBtn.setVisibility(View.VISIBLE);
+        userName = rootView.findViewById(R.id.textView_my_profile_name);
+        followerCount = rootView.findViewById(R.id.textView_follower_my_profile);
 
        return rootView;
     }
@@ -76,12 +82,19 @@ public class ProfileFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         FragmentUtils.activateNaviguationBack(this,true);
+        FragmentUtils.changeActionBarTittle(this,"Profile");
         inflater.inflate(R.menu.my_profile_menu, menu);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        Bundle args = getArguments();
+        userProfile =(UserProfile) args.getSerializable("user");
+
+        userName.setText(userProfile.getName());
+        followerCount.setText(userProfile.getFollowersCount() + " followers");
 
 
     }

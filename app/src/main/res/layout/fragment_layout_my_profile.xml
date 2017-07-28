@@ -27,6 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="21dp"
             android:text="Julien Birabent"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/_black"
             android:textSize="18sp"
             android:textStyle="bold"

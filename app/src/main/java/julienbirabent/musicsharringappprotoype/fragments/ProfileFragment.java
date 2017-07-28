@@ -111,6 +111,10 @@ public class ProfileFragment extends Fragment {
 
         switch (item.getItemId()){
 
+            case android.R.id.home:
+                getFragmentManager().popBackStack();
+
+                return true;
             case R.id.share_a_song :
 
                 FragmentManager fragmentManager = getFragmentManager();

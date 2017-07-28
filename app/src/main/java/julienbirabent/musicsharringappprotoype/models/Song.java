@@ -19,7 +19,7 @@ public class Song extends Observable implements Serializable  {
     private String album;
     private String name;
     private int albumVignetteId = -1;
-    private ArrayList<String> userRecommandations;
+    private ArrayList<UserProfile> whoRecommanded = new ArrayList<>();
     private boolean listened = false;
     private boolean recommanded = false;
     private ArrayList<Comment> comments = new ArrayList<>();
@@ -31,27 +31,21 @@ public class Song extends Observable implements Serializable  {
         this.name = name;
     }
 
-    public Song(String artist, String album, String name, ArrayList<String> userRecommandations) {
-        this.artist = artist;
-        this.album = album;
-        this.name = name;
-        this.userRecommandations = userRecommandations;
-    }
 
-    public Song(String artist, String album, String name,  int albumVignetteId, ArrayList<String> userRecommandations) {
+    public Song(String artist, String album, String name,  int albumVignetteId) {
         this.artist = artist;
         this.album = album;
         this.name = name;
         this.albumVignetteId = albumVignetteId;
-        this.userRecommandations = userRecommandations;
+
     }
 
-    public Song(String artist, String album, String name,  int albumVignetteId, ArrayList<String> userRecommandations, ArrayList<Comment> comments) {
+    public Song(String artist, String album, String name,  int albumVignetteId, ArrayList<UserProfile> whoRecommanded, ArrayList<Comment> comments) {
         this.artist = artist;
         this.album = album;
         this.name = name;
         this.albumVignetteId = albumVignetteId;
-        this.userRecommandations = userRecommandations;
+        this.whoRecommanded = whoRecommanded;
         this.comments = comments;
     }
 
@@ -84,11 +78,11 @@ public class Song extends Observable implements Serializable  {
 
         String formatted;
 
-        if(userRecommandations.size() == 0){
+        if(whoRecommanded.size() == 0){
             formatted = "Recommended by no one at the moment. Be the first!";
         }else{
-            int restOfRecommandation =  userRecommandations.size()-2;
-            formatted = "Recommended by "+ userRecommandations.get(0) +", " + userRecommandations.get(1) + " and " + restOfRecommandation + " more people";
+            int restOfRecommandation =  whoRecommanded.size()-2;
+            formatted = "Recommended by "+ whoRecommanded.get(0).getName() +", " + whoRecommanded.get(1).getName() + " and " + restOfRecommandation + " more people";
         }
 
         return formatted;
@@ -106,13 +100,6 @@ public class Song extends Observable implements Serializable  {
         this.albumVignetteId = albumVignetteId;
     }
 
-    public ArrayList<String> getUserRecommandations() {
-        return userRecommandations;
-    }
-
-    public void setUserRecommandations(ArrayList<String> userRecommandations) {
-        this.userRecommandations = userRecommandations;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -159,5 +146,13 @@ public class Song extends Observable implements Serializable  {
 
     public void setComments(ArrayList<Comment> comments) {
         this.comments = comments;
+    }
+
+    public ArrayList<UserProfile> getWhoRecommanded() {
+        return whoRecommanded;
+    }
+
+    public void setWhoRecommanded(ArrayList<UserProfile> whoRecommanded) {
+        this.whoRecommanded = whoRecommanded;
     }
 }

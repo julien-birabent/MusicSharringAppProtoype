@@ -91,7 +91,7 @@ public class ProfileFragment extends Fragment {
         super.onPause();
 
     }
-    
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

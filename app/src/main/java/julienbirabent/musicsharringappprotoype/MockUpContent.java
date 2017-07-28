@@ -79,7 +79,7 @@ public class MockUpContent {
 
     private void initAllTheSongsInTheWorld() {
 
-        ArrayList<String> userRecommandations = getSomeUserReommandations();
+        ArrayList<UserProfile> userRecommandations = getSomeUserRecommandations();
 
         allTheSongsInTheWorld = new Song[]{
 
@@ -155,18 +155,17 @@ public class MockUpContent {
 
     }
 
-    private ArrayList<String> getSomeUserReommandations() {
-        ArrayList<String> userRecommandations = new ArrayList<String>();
-        userRecommandations.add("Alex Martin");
-        userRecommandations.add("Marc-Antoine Roberge");
-        userRecommandations.add("Justin Trudeau");
-        userRecommandations.add("President Obama");
+    private ArrayList<UserProfile> getSomeUserRecommandations() {
+        ArrayList<UserProfile> userRecommandations = new ArrayList<>();
+        userRecommandations.add(otherUsers[1]);
+        userRecommandations.add(otherUsers[2]);
+        userRecommandations.add(otherUsers[0]);
         return userRecommandations;
     }
 
     private void initRandomSongs() {
 
-        ArrayList<String> userRecommandations = getSomeUserReommandations();
+        ArrayList<UserProfile> userRecommandations = getSomeUserRecommandations();
 
         songs = new Song[]{
 
@@ -175,8 +174,6 @@ public class MockUpContent {
                 new Song("Gorillaz", "Plastic Beach", "White Flag", R.drawable.plastic_beach_1000_1000, userRecommandations, someComments),
                 new Song("Gorillaz", "Plastic Beach", "Empire Ants", R.drawable.plastic_beach_1000_1000, userRecommandations, someComments),
                 new Song("Gorillaz", "Plastic Beach", "Stylo", R.drawable.plastic_beach_1000_1000, userRecommandations, someComments),
-                // Test l affichage de la vignette d album par défaut
-                new Song("Muse", "Origin of Symmetry", "Bliss", userRecommandations),
         };
     }
 

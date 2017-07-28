@@ -43,6 +43,23 @@
             android:layout_centerVertical="true"
             android:layout_alignStart="@+id/textView_my_profile_name" />
 
+        <Button
+            android:id="@+id/myprofile_follow_action"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_alignStart="@id/textView_follower_my_profile"
+            android:layout_below="@id/textView_follower_my_profile"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_button"
+            android:text="Follow"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:visibility="gone" />
+
+
     </RelativeLayout>
 
     <RelativeLayout

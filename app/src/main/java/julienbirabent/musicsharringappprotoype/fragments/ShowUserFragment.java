@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -13,7 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import julienbirabent.musicsharringappprotoype.FragmentUtils;
 import julienbirabent.musicsharringappprotoype.R;
@@ -29,6 +36,9 @@ public class ShowUserFragment extends Fragment {
     private Context context;
     private View rootView;
     private Song song;
+    private LinearLayout userList;
+    private ViewGroup container;
+    private ArrayList<UserProfile> users;
 
 
     public ShowUserFragment() {
@@ -45,9 +55,10 @@ public class ShowUserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
+        this.container = container;
+
         rootView = inflater.inflate(R.layout.show_user_fragment, container, false);
-
-
+        userList =(LinearLayout) rootView;
 
         return rootView;
     }
@@ -72,6 +83,39 @@ public class ShowUserFragment extends Fragment {
 
         Bundle args = getArguments();
         song = (Song)args.getSerializable("song");
+        int i = 0;
+        users = song.getWhoRecommanded();
+
+        for(final UserProfile user : users){
+
+            View userView = new View(context);
+            userView = LayoutInflater.from(context).inflate(R.layout.show_user_row, container, false);
+
+            ImageView photo = (ImageView) userView.findViewById(R.id.user_photo);
+            TextView name = (TextView) userView.findViewById(R.id.user_name);
+            TextView followercount = (TextView) userView.findViewById(R.id.user_followers_count);
+
+            photo.setImageResource(R.drawable.ic_profile);
+            name.setText(user.getName());
+            followercount.setText(user.getFollowersCount() + " followers");
+
+            userView.setId(i);
+            i++;
+
+            userView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    UserProfile userSelected;
+
+                    userSelected = users.get(view.getId());
+
+                    Log.e("Lala", user.getName());
+                }
+            });
+
+            userList.addView(userView);
+
+        }
 
 
     }
